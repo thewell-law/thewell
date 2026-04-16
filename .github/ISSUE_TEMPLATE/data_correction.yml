@@ -1,0 +1,33 @@
+name: Data correction
+description: Report an error in an existing judge or court record.
+title: "[correction] "
+labels: ["data-correction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        If you have a citation for the correct information, include it. Corrections without citations may be accepted but take longer to verify.
+  - type: input
+    id: page
+    attributes:
+      label: Page URL or data file
+      description: e.g., https://thewell.example/j/jane-doe or data/j/jane-doe.yaml
+    validations:
+      required: true
+  - type: textarea
+    id: incorrect
+    attributes:
+      label: What is wrong?
+    validations:
+      required: true
+  - type: textarea
+    id: correct
+    attributes:
+      label: What should it say?
+    validations:
+      required: true
+  - type: textarea
+    id: citation
+    attributes:
+      label: Citation
+      description: Primary sources strongly preferred.

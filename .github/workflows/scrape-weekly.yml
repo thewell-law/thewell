@@ -1,0 +1,13 @@
+name: Scrape (weekly)
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Placeholder
+        run: echo "Weekly scrape job not yet configured."

@@ -1,0 +1,35 @@
+name: Extractor bug
+description: A scraper is producing wrong output.
+title: "[extractor] "
+labels: ["bug", "scrapers"]
+body:
+  - type: input
+    id: extractor
+    attributes:
+      label: Which extractor?
+      description: Path under scrapers/ or the jurisdiction name.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected output
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual output
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: Source document URL
+      description: Link to the upstream document the extractor is parsing.

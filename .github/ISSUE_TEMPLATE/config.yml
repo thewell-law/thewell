@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security report
+    url: https://github.com/thewell/thewell/blob/main/SECURITY.md
+    about: For vulnerabilities, do not open a public issue. See SECURITY.md.
+  - name: Discussion
+    url: https://github.com/thewell/thewell/discussions
+    about: General questions, design discussion, and non-actionable feedback.

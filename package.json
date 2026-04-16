@@ -1,0 +1,19 @@
+{
+  "name": "thewell",
+  "private": true,
+  "version": "0.0.0",
+  "description": "An open-source database of judicial procedure.",
+  "license": "AGPL-3.0-only",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thewell/thewell.git"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "workspaces": [
+    "site",
+    "scrapers"
+  ]
+}

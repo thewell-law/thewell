@@ -1,0 +1,13 @@
+name: Canary
+
+on:
+  schedule:
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Placeholder
+        run: echo "Canary staleness check not yet configured."

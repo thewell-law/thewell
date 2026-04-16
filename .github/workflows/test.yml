@@ -1,0 +1,46 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  site:
+    name: Site and tooling (pnpm)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - name: Install
+        run: pnpm install --frozen-lockfile || pnpm install
+      - name: Test
+        run: pnpm -r run test --if-present
+      - name: Build
+        run: pnpm -r run build --if-present
+
+  scrapers:
+    name: Scrapers (uv)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Test
+        working-directory: scrapers
+        run: |
+          if [ -f pyproject.toml ]; then
+            uv sync
+            uv run pytest
+          else
+            echo "scrapers/pyproject.toml not present yet; skipping."
+          fi

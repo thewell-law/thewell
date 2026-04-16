@@ -1,0 +1,32 @@
+name: Jurisdiction request
+description: Ask for a court, division, or judge we don't yet cover.
+title: "[jurisdiction] "
+labels: ["jurisdiction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for telling us what's missing. The more specific you are, the faster we can scope the work.
+  - type: input
+    id: jurisdiction
+    attributes:
+      label: Jurisdiction
+      description: State or country, and court (e.g., "California, Los Angeles County Superior Court, Stanley Mosk Courthouse").
+    validations:
+      required: true
+  - type: textarea
+    id: judges
+    attributes:
+      label: Specific judges or divisions
+      description: Optional. Names, division numbers, or "all of it".
+  - type: textarea
+    id: sources
+    attributes:
+      label: Primary sources
+      description: Links to docket systems, calendars, opinion repositories, local rules, etc.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else we should know?
