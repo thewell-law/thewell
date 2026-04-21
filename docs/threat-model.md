@@ -70,6 +70,21 @@ We do not try to protect against a majority of maintainers going rogue. A govern
 - Not publishing submission timestamps at sub-day granularity.
 - Encouraging contributors to generalize ("scheduling orders in this division tend to..." rather than "on 2026-03-14 in Courtroom 5B, the judge said..."), and offering guidance in the submission UI.
 - Offering the option to pool contributions into a single maintainer-authored summary rather than publishing them verbatim.
+- Suppressing aggregate display below three contributors for any given (judge, field, value) combination.
+
+### 5. Account takeover of a contributor
+
+**Who.** An attacker who obtains an approved contributor's email plus credentials, or steals a live session token.
+
+**What they want.** The ability to submit contributions under the victim's `contribution_key_hash`, corrupting the data and damaging the victim's standing in the contributor community.
+
+**Mitigations.**
+
+- 2FA required for every contributor account, with passkeys as the primary factor and TOTP accepted (see [`auth.md`](./auth.md)).
+- Step-up re-authentication required before contribution submission when the session is older than one hour.
+- Short session TTLs (12h max, 2h idle) cap the usefulness of any single leaked token.
+- Contributions enter a moderation queue before publication; obvious abuse is caught before it reaches `data/`.
+- Contributors can report a compromised account and request review and removal of contributions made during the compromise window.
 
 ## Trust boundaries
 
