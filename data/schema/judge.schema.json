@@ -1,0 +1,356 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thewell.law/schema/judge.schema.json",
+  "title": "Judge Card",
+  "description": "Canonical schema for a single judge record in The Well. Keep data/schema/fields.yaml in sync with the enum values below; the linter enforces this.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "slug",
+    "name",
+    "jurisdiction",
+    "court_name",
+    "court_type",
+    "status",
+    "created_at",
+    "updated_at",
+    "standing_orders",
+    "procedural",
+    "sources"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+-[a-z0-9-]+$",
+      "description": "Globally unique identifier. Convention: <jurisdiction>-<slug>."
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "jurisdiction": {
+      "type": "string",
+      "enum": ["cacd", "casd", "ca9", "lasc", "sdsc"]
+    },
+    "court_name": {
+      "type": "string"
+    },
+    "court_type": {
+      "type": "string",
+      "enum": ["federal_district", "federal_appellate", "state_superior"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "senior", "magistrate", "retired"]
+    },
+    "honorific": {
+      "type": "string",
+      "default": "Hon."
+    },
+    "chambers_location": {
+      "type": "string"
+    },
+    "courtroom": {
+      "type": "string"
+    },
+    "appointed_by": {
+      "type": "string"
+    },
+    "appointed_year": {
+      "type": "integer",
+      "minimum": 1789,
+      "maximum": 2100
+    },
+    "prior_practice": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "law_school": {
+      "type": "string"
+    },
+    "undergrad": {
+      "type": "string"
+    },
+    "chambers_email": {
+      "type": "string",
+      "format": "email"
+    },
+    "proposed_order_email": {
+      "type": "string",
+      "format": "email"
+    },
+    "bio_notes": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "last_editor_review_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "standing_orders": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/standing_order" }
+    },
+    "procedural": { "$ref": "#/$defs/procedural" },
+    "sources": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/source" }
+    }
+  },
+  "$defs": {
+    "standing_order": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "url", "last_fetched_at"],
+      "properties": {
+        "title": { "type": "string" },
+        "effective_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "discovery_disputes",
+              "page_limits",
+              "courtesy_copies",
+              "pretrial",
+              "oral_argument",
+              "settlement",
+              "patent",
+              "trial",
+              "technology",
+              "junior_attorney"
+            ]
+          }
+        },
+        "last_fetched_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field_key", "source_type", "confidence", "last_verified_at"],
+      "properties": {
+        "field_key": {
+          "type": "string",
+          "description": "Which procedural field this source documents."
+        },
+        "source_type": {
+          "type": "string",
+          "enum": [
+            "standing_order",
+            "local_rule",
+            "court_website",
+            "pacer_derived",
+            "editor_verified",
+            "community_aggregated"
+          ]
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "source_excerpt": {
+          "type": "string"
+        },
+        "confidence": {
+          "type": "string",
+          "enum": ["auto_extracted", "verified", "community_aggregated"]
+        },
+        "last_verified_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "procedural": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Typed procedural fields. Each is optional; keep data/schema/fields.yaml in sync with the enum lists below.",
+      "properties": {
+        "msj_page_limit": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "msj_reply_page_limit": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "motion_page_limit": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "motion_reply_page_limit": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "motion_ruling_cadence_median_days": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rules_from_bench_pct": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "courtesy_copies_required": {
+          "type": "string",
+          "enum": ["yes", "no", "on_request", "case_type_dependent"]
+        },
+        "courtesy_copy_format": {
+          "type": "string",
+          "enum": ["paper", "pdf_email", "both_required", "na"]
+        },
+        "courtesy_copy_timing": {
+          "type": "string",
+          "enum": [
+            "within_24hr",
+            "within_48hr",
+            "next_business_day",
+            "same_day_as_filing",
+            "not_specified"
+          ]
+        },
+        "chambers_direct_contact": {
+          "type": "string",
+          "enum": [
+            "prohibited_except_emergencies",
+            "procedural_only",
+            "permitted_via_law_clerk",
+            "permitted_via_ja",
+            "case_by_case"
+          ]
+        },
+        "zoom_hearings": {
+          "type": "string",
+          "enum": [
+            "default_remote",
+            "default_in_person",
+            "status_conf_only_remote",
+            "hybrid_by_request",
+            "rarely_permits",
+            "in_person_only"
+          ]
+        },
+        "telephonic_appearance": {
+          "type": "string",
+          "enum": [
+            "permitted_with_notice",
+            "case_by_case",
+            "discouraged",
+            "not_permitted"
+          ]
+        },
+        "electronic_exhibits_at_trial": {
+          "type": "string",
+          "enum": ["required", "preferred", "permitted", "not_permitted"]
+        },
+        "motion_ruling_cadence": {
+          "type": "string",
+          "enum": [
+            "under_30_days",
+            "30_60_days",
+            "60_90_days",
+            "90_plus_days",
+            "highly_variable"
+          ]
+        },
+        "rules_from_bench": {
+          "type": "string",
+          "enum": ["frequently", "occasionally", "rarely", "never"]
+        },
+        "page_limit_strictness": {
+          "type": "string",
+          "enum": [
+            "strict_no_exceptions",
+            "strict_with_leave",
+            "lenient_with_good_cause",
+            "generally_flexible"
+          ]
+        },
+        "enforces_meet_and_confer": {
+          "type": "string",
+          "enum": [
+            "strictly_enforced",
+            "moderately_enforced",
+            "loosely_enforced"
+          ]
+        },
+        "oral_argument_default": {
+          "type": "string",
+          "enum": [
+            "heard_by_default",
+            "submitted_by_default",
+            "judge_discretion"
+          ]
+        },
+        "oral_argument_time_typical": {
+          "type": "string",
+          "enum": [
+            "under_15_min",
+            "15_to_30_min",
+            "30_to_60_min",
+            "60_plus_min"
+          ]
+        },
+        "time_limit_strictness": {
+          "type": "string",
+          "enum": ["strict_cutoff", "moderate", "lenient"]
+        },
+        "bench_engagement": {
+          "type": "string",
+          "enum": [
+            "hot_bench_expect_questions",
+            "moderate_questioning",
+            "cold_bench_let_argue"
+          ]
+        },
+        "junior_attorney_argument": {
+          "type": "string",
+          "enum": [
+            "encourages_via_standing_order",
+            "permits_when_requested",
+            "silent",
+            "discourages"
+          ]
+        },
+        "courtroom_tech_available": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "elmo",
+              "projector",
+              "podium_mic",
+              "realtime_transcript",
+              "jury_monitors",
+              "hdmi",
+              "vga"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
