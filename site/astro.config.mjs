@@ -1,6 +1,10 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-import sitemap from '@astrojs/sitemap';
+
+// Note: @astrojs/sitemap is installed but not activated here. It crashes
+// on astro:build:done when there are zero static routes (the case until
+// Stage 3 adds the judge pages). Re-add `sitemap()` to the integrations
+// array in the PR that introduces real routes.
 
 export default defineConfig({
   site: 'https://thewell.law',
@@ -11,7 +15,6 @@ export default defineConfig({
   },
   integrations: [
     tailwind({ applyBaseStyles: false }),
-    sitemap(),
   ],
   vite: {
     ssr: {

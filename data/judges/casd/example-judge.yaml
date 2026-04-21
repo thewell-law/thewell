@@ -1,36 +1,229 @@
-# Placeholder judge record so the site has something to render before the
-# scraper pipeline is live. Replace or remove once real records land.
+# Reference judge card. Not a real judge.
+#
+# This file exercises every field in data/schema/judge.schema.json and
+# serves as the template for scraper output. If a scraper produces a
+# YAML file that does not validate against the schema, the linter
+# (scripts/lint-judge-yaml.py) will fail CI. See docs/schema.md.
+
+id: casd-example-judge
 slug: example-judge
-jurisdiction: casd
-court: U.S. District Court, Southern District of California
 name: Example Judge
-honorific: Hon.
-title: District Judge
-city: San Diego
+honorific: "Hon."
+jurisdiction: casd
+court_name: "U.S. District Court, Southern District of California"
+court_type: federal_district
 status: active
-appointed: "2010-01-01"
-updated: "2026-04-17"
-profile_url: https://www.casd.uscourts.gov/judges
-standing_orders: []
-facts:
-  filing:
-    courtesy_copies_required:
-      value: false
-      source:
-        type: primary
-        title: Placeholder — replace with real citation
-    page_limits_motion:
-      value: 25
-      source:
-        type: primary
-        title: Placeholder — replace with real citation
-  motions:
-    motions_in_limine_deadline:
-      value: 14 days before trial
-  oral_argument:
-    default_policy:
-      value: By request
-  technology:
-    remote_hearings:
-      value: Permitted for non-evidentiary matters
-  other: {}
+chambers_location: "San Diego — Edward J. Schwartz Courthouse"
+courtroom: "Example Courtroom 5B"
+appointed_by: "Placeholder President"
+appointed_year: 2020
+prior_practice:
+  - "Example Firm LLP"
+  - "Office of the Example U.S. Attorney"
+law_school: "Example Law School"
+undergrad: "Example University"
+chambers_email: "example_casd@casd.uscourts.gov"
+proposed_order_email: "exampleorders_casd@casd.uscourts.gov"
+bio_notes: >-
+  This is an example reference judge card, not a real judge. It is
+  used for schema validation and as a template for scraper output.
+  See scrapers/casd/ for the scraper that will produce real judge
+  cards once Stage 3 is complete.
+created_at: "2026-04-21T12:00:00Z"
+updated_at: "2026-04-21T12:00:00Z"
+last_editor_review_at: "2026-04-21T12:00:00Z"
+
+standing_orders:
+  - title: "Standing Order for Civil Cases"
+    effective_date: "2023-01-15"
+    url: "https://www.casd.uscourts.gov/judges/example/civil_standing_order.pdf"
+    topics:
+      - discovery_disputes
+      - page_limits
+      - courtesy_copies
+      - pretrial
+      - oral_argument
+    last_fetched_at: "2026-04-21T12:00:00Z"
+  - title: "Standing Order for Patent Cases"
+    effective_date: "2023-03-01"
+    url: "https://www.casd.uscourts.gov/judges/example/patent_standing_order.pdf"
+    topics:
+      - patent
+      - technology
+      - trial
+      - junior_attorney
+    last_fetched_at: "2026-04-21T12:00:00Z"
+
+procedural:
+  msj_page_limit: 25
+  msj_reply_page_limit: 15
+  motion_page_limit: 20
+  motion_reply_page_limit: 10
+  motion_ruling_cadence_median_days: 45
+  rules_from_bench_pct: 0.12
+  courtesy_copies_required: on_request
+  courtesy_copy_format: pdf_email
+  courtesy_copy_timing: next_business_day
+  chambers_direct_contact: procedural_only
+  zoom_hearings: hybrid_by_request
+  telephonic_appearance: permitted_with_notice
+  electronic_exhibits_at_trial: preferred
+  motion_ruling_cadence: 30_60_days
+  rules_from_bench: occasionally
+  page_limit_strictness: strict_with_leave
+  enforces_meet_and_confer: strictly_enforced
+  oral_argument_default: heard_by_default
+  oral_argument_time_typical: 15_to_30_min
+  time_limit_strictness: moderate
+  bench_engagement: moderate_questioning
+  junior_attorney_argument: encourages_via_standing_order
+  courtroom_tech_available:
+    - elmo
+    - projector
+    - podium_mic
+    - jury_monitors
+    - hdmi
+
+sources:
+  # Filing — page limits (from civil standing order)
+  - field_key: msj_page_limit
+    source_type: standing_order
+    source_url: "https://www.casd.uscourts.gov/judges/example/civil_standing_order.pdf"
+    source_excerpt: "Memoranda in support of summary judgment motions shall not exceed 25 pages."
+    confidence: auto_extracted
+    last_verified_at: "2026-04-21T12:00:00Z"
+  - field_key: msj_reply_page_limit
+    source_type: standing_order
+    source_url: "https://www.casd.uscourts.gov/judges/example/civil_standing_order.pdf"
+    source_excerpt: "Reply briefs on motions for summary judgment shall not exceed 15 pages."
+    confidence: auto_extracted
+    last_verified_at: "2026-04-21T12:00:00Z"
+  - field_key: motion_page_limit
+    source_type: standing_order
+    source_url: "https://www.casd.uscourts.gov/judges/example/civil_standing_order.pdf"
+    source_excerpt: "Opening memoranda for non-dispositive motions shall not exceed 20 pages."
+    confidence: auto_extracted
+    last_verified_at: "2026-04-21T12:00:00Z"
+  - field_key: motion_reply_page_limit
+    source_type: standing_order
+    source_url: "https://www.casd.uscourts.gov/judges/example/civil_standing_order.pdf"
+    source_excerpt: "Reply memoranda on non-dispositive motions shall not exceed 10 pages."
+    confidence: auto_extracted
+    last_verified_at: "2026-04-21T12:00:00Z"
+
+  # Filing — courtesy copies (civil standing order)
+  - field_key: courtesy_copies_required
+    source_type: standing_order
+    source_url: "https://www.casd.uscourts.gov/judges/example/civil_standing_order.pdf"
+    source_excerpt: "The Court does not require courtesy copies except upon request of chambers."
+    confidence: auto_extracted
+    last_verified_at: "2026-04-21T12:00:00Z"
+  - field_key: courtesy_copy_format
+    source_type: standing_order
+    source_url: "https://www.casd.uscourts.gov/judges/example/civil_standing_order.pdf"
+    source_excerpt: "When requested, courtesy copies shall be emailed as a single bookmarked PDF."
+    confidence: auto_extracted
+    last_verified_at: "2026-04-21T12:00:00Z"
+  - field_key: courtesy_copy_timing
+    source_type: standing_order
+    source_url: "https://www.casd.uscourts.gov/judges/example/civil_standing_order.pdf"
+    source_excerpt: "Courtesy copies shall be submitted no later than the next business day after filing."
+    confidence: auto_extracted
+    last_verified_at: "2026-04-21T12:00:00Z"
+
+  # Filing — strictness (community observation)
+  - field_key: page_limit_strictness
+    source_type: community_aggregated
+    source_excerpt: "Aggregated observations from contributors indicate enforcement of default limits with leave granted on motion."
+    confidence: community_aggregated
+    last_verified_at: "2026-04-21T12:00:00Z"
+
+  # Communication
+  - field_key: chambers_direct_contact
+    source_type: court_website
+    source_url: "https://www.casd.uscourts.gov/judges/example/procedures"
+    source_excerpt: "Counsel should contact chambers only regarding scheduling and procedural matters, and should address all such communications to the courtroom deputy."
+    confidence: verified
+    last_verified_at: "2026-04-21T12:00:00Z"
+  - field_key: telephonic_appearance
+    source_type: standing_order
+    source_url: "https://www.casd.uscourts.gov/judges/example/civil_standing_order.pdf"
+    source_excerpt: "Telephonic appearances are permitted for non-evidentiary matters with at least 24 hours' advance notice."
+    confidence: auto_extracted
+    last_verified_at: "2026-04-21T12:00:00Z"
+
+  # Motion practice
+  - field_key: motion_ruling_cadence
+    source_type: pacer_derived
+    source_excerpt: "Computed as the median days from full submission to order across contested civil motions in the 2024 calendar year."
+    confidence: auto_extracted
+    last_verified_at: "2026-04-21T12:00:00Z"
+  - field_key: motion_ruling_cadence_median_days
+    source_type: pacer_derived
+    source_excerpt: "Median days from full submission to order, 2024 calendar year, contested civil motions."
+    confidence: auto_extracted
+    last_verified_at: "2026-04-21T12:00:00Z"
+  - field_key: rules_from_bench
+    source_type: pacer_derived
+    source_excerpt: "Derived from minute-order text indicating bench ruling within 24 hours of hearing."
+    confidence: auto_extracted
+    last_verified_at: "2026-04-21T12:00:00Z"
+  - field_key: rules_from_bench_pct
+    source_type: pacer_derived
+    source_excerpt: "Fraction of contested motions ruled from the bench, 2024 calendar year."
+    confidence: auto_extracted
+    last_verified_at: "2026-04-21T12:00:00Z"
+  - field_key: enforces_meet_and_confer
+    source_type: community_aggregated
+    source_excerpt: "Aggregated contributor observations describe consistent strict enforcement of meet-and-confer requirements before discovery motions."
+    confidence: community_aggregated
+    last_verified_at: "2026-04-21T12:00:00Z"
+
+  # Oral argument
+  - field_key: oral_argument_default
+    source_type: standing_order
+    source_url: "https://www.casd.uscourts.gov/judges/example/civil_standing_order.pdf"
+    source_excerpt: "The Court hears argument on all fully briefed dispositive motions."
+    confidence: auto_extracted
+    last_verified_at: "2026-04-21T12:00:00Z"
+  - field_key: oral_argument_time_typical
+    source_type: community_aggregated
+    source_excerpt: "Aggregated observations from recent hearings."
+    confidence: community_aggregated
+    last_verified_at: "2026-04-21T12:00:00Z"
+  - field_key: time_limit_strictness
+    source_type: community_aggregated
+    source_excerpt: "Aggregated observations — the Court allows modest overruns where argument remains productive."
+    confidence: community_aggregated
+    last_verified_at: "2026-04-21T12:00:00Z"
+  - field_key: bench_engagement
+    source_type: community_aggregated
+    source_excerpt: "Aggregated observations describe targeted questioning rather than sustained probing."
+    confidence: community_aggregated
+    last_verified_at: "2026-04-21T12:00:00Z"
+  - field_key: junior_attorney_argument
+    source_type: standing_order
+    source_url: "https://www.casd.uscourts.gov/judges/example/patent_standing_order.pdf"
+    source_excerpt: "Junior counsel who drafted a brief are encouraged to argue it; the Court will reserve time for second-chair participation on request."
+    confidence: auto_extracted
+    last_verified_at: "2026-04-21T12:00:00Z"
+
+  # Technology
+  - field_key: zoom_hearings
+    source_type: court_website
+    source_url: "https://www.casd.uscourts.gov/judges/example/procedures"
+    source_excerpt: "Hybrid hearings are offered by request; in-person is default for evidentiary matters."
+    confidence: verified
+    last_verified_at: "2026-04-21T12:00:00Z"
+  - field_key: electronic_exhibits_at_trial
+    source_type: standing_order
+    source_url: "https://www.casd.uscourts.gov/judges/example/patent_standing_order.pdf"
+    source_excerpt: "The Court prefers electronic presentation of exhibits at trial; counsel should confirm courtroom capability in advance."
+    confidence: auto_extracted
+    last_verified_at: "2026-04-21T12:00:00Z"
+  - field_key: courtroom_tech_available
+    source_type: court_website
+    source_url: "https://www.casd.uscourts.gov/judges/example/courtroom-technology"
+    source_excerpt: "Courtroom 5B is equipped with ELMO, projector, podium microphone, jury monitors, and HDMI input."
+    confidence: verified
+    last_verified_at: "2026-04-21T12:00:00Z"

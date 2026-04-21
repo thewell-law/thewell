@@ -1,0 +1,407 @@
+# Canonical taxonomy of procedural fields for The Well.
+#
+# This file is the source of truth for:
+#   - display labels shown on the judge page
+#   - contributor-facing prompt text used when soliciting a Tier 3
+#     observation
+#   - human-readable explanations of what each field means
+#   - field category (for grouping on the site)
+#   - field tier (see data tiers below)
+#
+# The JSON Schema at data/schema/judge.schema.json is the source of
+# truth for:
+#   - field presence (required vs optional)
+#   - field type (string enum, integer, number, array)
+#   - allowed enum values
+#
+# The two files MUST stay in sync on enum values. The linter
+# (scripts/lint-judge-yaml.py) cross-checks them and fails CI on
+# drift.
+#
+# To add a new field:
+#   1. Add the field to data/schema/judge.schema.json under
+#      $defs.procedural.properties with its type and enum.
+#   2. Add a corresponding entry here with display_label,
+#      description, category, tier, and (for enums) values +
+#      value_labels.
+#   3. Update docs/schema.md to document the addition.
+#   4. If Tier 1: add or update an extractor under scrapers/.
+#      If Tier 3: add a contributor_prompt entry here.
+#   5. Run scripts/lint-judge-yaml.py locally; it must pass.
+#   6. Update data/judges/casd/example-judge.yaml to include the
+#      new field so the reference card stays complete.
+#
+# Data tiers:
+#   Tier 1 — objective, extractable from standing orders or court
+#            websites by a rules-based scraper.
+#   Tier 2 — derivable from PACER or other public court data by
+#            computation.
+#   Tier 3 — community-contributed subjective-but-factual
+#            observations from verified attorneys.
+
+fields:
+
+  # ========================================================
+  # Filing
+  # ========================================================
+
+  msj_page_limit:
+    field_type: integer
+    display_label: "MSJ page limit"
+    description: "Maximum page length for a memorandum in support of a motion for summary judgment."
+    category: filing
+    tier: 1
+
+  msj_reply_page_limit:
+    field_type: integer
+    display_label: "MSJ reply page limit"
+    description: "Maximum page length for the reply brief on a motion for summary judgment."
+    category: filing
+    tier: 1
+
+  motion_page_limit:
+    field_type: integer
+    display_label: "Motion page limit"
+    description: "Default page limit for motion briefs other than summary judgment."
+    category: filing
+    tier: 1
+
+  motion_reply_page_limit:
+    field_type: integer
+    display_label: "Motion reply page limit"
+    description: "Default page limit for reply briefs on motions other than summary judgment."
+    category: filing
+    tier: 1
+
+  page_limit_strictness:
+    field_type: enum
+    values:
+      - strict_no_exceptions
+      - strict_with_leave
+      - lenient_with_good_cause
+      - generally_flexible
+    value_labels:
+      strict_no_exceptions: "Strict, no exceptions"
+      strict_with_leave: "Strict — leave required to exceed"
+      lenient_with_good_cause: "Lenient with good cause"
+      generally_flexible: "Generally flexible"
+    display_label: "Page-limit strictness"
+    description: "How this judge treats requests to exceed the default page limits."
+    contributor_prompt: "In practice, how strict is this judge about page limits?"
+    category: filing
+    tier: 3
+
+  courtesy_copies_required:
+    field_type: enum
+    values:
+      - "yes"
+      - "no"
+      - on_request
+      - case_type_dependent
+    value_labels:
+      "yes": "Yes, required"
+      "no": "Not required"
+      on_request: "On request only"
+      case_type_dependent: "Depends on case type"
+    display_label: "Courtesy copies"
+    description: "Whether this judge requires courtesy copies of filings."
+    contributor_prompt: "Does this judge require courtesy copies of filings?"
+    category: filing
+    tier: 1
+
+  courtesy_copy_format:
+    field_type: enum
+    values:
+      - paper
+      - pdf_email
+      - both_required
+      - na
+    value_labels:
+      paper: "Paper"
+      pdf_email: "PDF by email"
+      both_required: "Both paper and PDF"
+      na: "Not applicable"
+    display_label: "Courtesy copy format"
+    description: "Format in which courtesy copies must be delivered, when required."
+    category: filing
+    tier: 1
+
+  courtesy_copy_timing:
+    field_type: enum
+    values:
+      - within_24hr
+      - within_48hr
+      - next_business_day
+      - same_day_as_filing
+      - not_specified
+    value_labels:
+      within_24hr: "Within 24 hours"
+      within_48hr: "Within 48 hours"
+      next_business_day: "Next business day"
+      same_day_as_filing: "Same day as filing"
+      not_specified: "Not specified"
+    display_label: "Courtesy copy timing"
+    description: "Deadline for delivering courtesy copies relative to filing."
+    category: filing
+    tier: 1
+
+  # ========================================================
+  # Communication
+  # ========================================================
+
+  chambers_direct_contact:
+    field_type: enum
+    values:
+      - prohibited_except_emergencies
+      - procedural_only
+      - permitted_via_law_clerk
+      - permitted_via_ja
+      - case_by_case
+    value_labels:
+      prohibited_except_emergencies: "Prohibited except in emergencies"
+      procedural_only: "Procedural questions only"
+      permitted_via_law_clerk: "Permitted via law clerk"
+      permitted_via_ja: "Permitted via judicial assistant"
+      case_by_case: "Case-by-case"
+    display_label: "Chambers contact"
+    description: "When and how counsel may contact chambers directly."
+    category: communication
+    tier: 1
+
+  telephonic_appearance:
+    field_type: enum
+    values:
+      - permitted_with_notice
+      - case_by_case
+      - discouraged
+      - not_permitted
+    value_labels:
+      permitted_with_notice: "Permitted with advance notice"
+      case_by_case: "Case-by-case"
+      discouraged: "Discouraged"
+      not_permitted: "Not permitted"
+    display_label: "Telephonic appearance"
+    description: "Availability of telephonic appearances for hearings."
+    category: communication
+    tier: 1
+
+  # ========================================================
+  # Motion practice
+  # ========================================================
+
+  motion_ruling_cadence:
+    field_type: enum
+    values:
+      - under_30_days
+      - 30_60_days
+      - 60_90_days
+      - 90_plus_days
+      - highly_variable
+    value_labels:
+      under_30_days: "Under 30 days"
+      30_60_days: "30–60 days"
+      60_90_days: "60–90 days"
+      90_plus_days: "90+ days"
+      highly_variable: "Highly variable"
+    display_label: "Motion ruling cadence"
+    description: "Typical time from submission to ruling on a contested motion."
+    category: motion_practice
+    tier: 2
+
+  motion_ruling_cadence_median_days:
+    field_type: integer
+    display_label: "Motion ruling cadence — median days"
+    description: "Median number of days from submission to ruling on a contested motion, computed from PACER."
+    category: motion_practice
+    tier: 2
+
+  rules_from_bench:
+    field_type: enum
+    values:
+      - frequently
+      - occasionally
+      - rarely
+      - never
+    value_labels:
+      frequently: "Frequently"
+      occasionally: "Occasionally"
+      rarely: "Rarely"
+      never: "Never"
+    display_label: "Rules from the bench"
+    description: "How often this judge announces a ruling from the bench rather than taking the matter under submission."
+    category: motion_practice
+    tier: 2
+
+  rules_from_bench_pct:
+    field_type: number
+    display_label: "Rules from the bench (fraction)"
+    description: "Fraction of motions ruled on from the bench, as a number between 0 and 1, computed from PACER."
+    category: motion_practice
+    tier: 2
+
+  enforces_meet_and_confer:
+    field_type: enum
+    values:
+      - strictly_enforced
+      - moderately_enforced
+      - loosely_enforced
+    value_labels:
+      strictly_enforced: "Strictly enforced"
+      moderately_enforced: "Moderately enforced"
+      loosely_enforced: "Loosely enforced"
+    display_label: "Meet-and-confer enforcement"
+    description: "How this judge treats meet-and-confer compliance before a motion is heard."
+    contributor_prompt: "In your experience, how strictly does this judge enforce the meet-and-confer requirement?"
+    category: motion_practice
+    tier: 3
+
+  # ========================================================
+  # Oral argument
+  # ========================================================
+
+  oral_argument_default:
+    field_type: enum
+    values:
+      - heard_by_default
+      - submitted_by_default
+      - judge_discretion
+    value_labels:
+      heard_by_default: "Heard by default"
+      submitted_by_default: "Submitted by default"
+      judge_discretion: "Judge's discretion"
+    display_label: "Oral argument default"
+    description: "Whether this judge hears oral argument by default or takes motions on the papers."
+    category: oral_argument
+    tier: 1
+
+  oral_argument_time_typical:
+    field_type: enum
+    values:
+      - under_15_min
+      - 15_to_30_min
+      - 30_to_60_min
+      - 60_plus_min
+    value_labels:
+      under_15_min: "Under 15 minutes"
+      15_to_30_min: "15–30 minutes"
+      30_to_60_min: "30–60 minutes"
+      60_plus_min: "60+ minutes"
+    display_label: "Typical oral argument length"
+    description: "How long oral argument typically runs before this judge."
+    contributor_prompt: "How long does oral argument typically run before this judge?"
+    category: oral_argument
+    tier: 3
+
+  time_limit_strictness:
+    field_type: enum
+    values:
+      - strict_cutoff
+      - moderate
+      - lenient
+    value_labels:
+      strict_cutoff: "Strict cutoff"
+      moderate: "Moderate"
+      lenient: "Lenient"
+    display_label: "Time-limit strictness"
+    description: "How strictly this judge enforces argument time limits."
+    contributor_prompt: "How strictly does this judge enforce argument time limits?"
+    category: oral_argument
+    tier: 3
+
+  bench_engagement:
+    field_type: enum
+    values:
+      - hot_bench_expect_questions
+      - moderate_questioning
+      - cold_bench_let_argue
+    value_labels:
+      hot_bench_expect_questions: "Hot bench — expect questions"
+      moderate_questioning: "Moderate questioning"
+      cold_bench_let_argue: "Cold bench — let you argue"
+    display_label: "Bench engagement"
+    description: "Level of judicial engagement during oral argument."
+    contributor_prompt: "How engaged is this judge during oral argument?"
+    category: oral_argument
+    tier: 3
+
+  junior_attorney_argument:
+    field_type: enum
+    values:
+      - encourages_via_standing_order
+      - permits_when_requested
+      - silent
+      - discourages
+    value_labels:
+      encourages_via_standing_order: "Encourages (per standing order)"
+      permits_when_requested: "Permits when requested"
+      silent: "Silent"
+      discourages: "Discourages"
+    display_label: "Junior attorney argument"
+    description: "This judge's posture on junior attorneys arguing motions."
+    category: oral_argument
+    tier: 1
+
+  # ========================================================
+  # Technology
+  # ========================================================
+
+  zoom_hearings:
+    field_type: enum
+    values:
+      - default_remote
+      - default_in_person
+      - status_conf_only_remote
+      - hybrid_by_request
+      - rarely_permits
+      - in_person_only
+    value_labels:
+      default_remote: "Remote by default"
+      default_in_person: "In-person by default"
+      status_conf_only_remote: "Remote for status conferences only"
+      hybrid_by_request: "Hybrid by request"
+      rarely_permits: "Rarely permits"
+      in_person_only: "In-person only"
+    display_label: "Zoom hearings"
+    description: "This judge's policy on remote (Zoom/video) hearings."
+    category: technology
+    tier: 1
+
+  electronic_exhibits_at_trial:
+    field_type: enum
+    values:
+      - required
+      - preferred
+      - permitted
+      - not_permitted
+    value_labels:
+      required: "Required"
+      preferred: "Preferred"
+      permitted: "Permitted"
+      not_permitted: "Not permitted"
+    display_label: "Electronic exhibits at trial"
+    description: "This judge's posture on electronic presentation of exhibits at trial."
+    category: technology
+    tier: 1
+
+  courtroom_tech_available:
+    field_type: multi_select
+    values:
+      - elmo
+      - projector
+      - podium_mic
+      - realtime_transcript
+      - jury_monitors
+      - hdmi
+      - vga
+    value_labels:
+      elmo: "ELMO / document camera"
+      projector: "Projector"
+      podium_mic: "Podium microphone"
+      realtime_transcript: "Realtime transcript"
+      jury_monitors: "Jury monitors"
+      hdmi: "HDMI input"
+      vga: "VGA input"
+    display_label: "Courtroom technology"
+    description: "Presentation and recording technology available in this judge's courtroom."
+    category: technology
+    tier: 1

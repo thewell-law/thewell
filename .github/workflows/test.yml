@@ -13,18 +13,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
-        with:
-          version: 10
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: pnpm
       - name: Install
         run: pnpm install --frozen-lockfile || pnpm install
       - name: Test
-        run: pnpm -r run test --if-present
+        run: pnpm -r --if-present run test
       - name: Build
-        run: pnpm -r run build --if-present
+        run: pnpm -r --if-present run build
 
   scrapers:
     name: Scrapers (uv)
@@ -44,3 +41,19 @@ jobs:
           else
             echo "scrapers/pyproject.toml not present yet; skipping."
           fi
+
+  lint-data:
+    name: Lint judge YAML
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Sync dependencies
+        working-directory: scripts
+        run: uv sync
+      - name: Lint
+        working-directory: scripts
+        run: uv run python lint-judge-yaml.py --strict
