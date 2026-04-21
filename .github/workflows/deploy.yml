@@ -1,3 +1,7 @@
+# Deploy pipeline.
+# Stage 3: this workflow will build the Astro site and deploy to
+# Cloudflare Pages via the Cloudflare Pages GitHub Action on merges
+# to main.
 name: Deploy
 
 on:

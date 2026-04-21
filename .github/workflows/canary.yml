@@ -1,8 +1,12 @@
+# Canary staleness check.
+# Stage 7: this workflow will verify the CANARY.md "Last updated"
+# date, confirm the presence of valid PGP signatures from at least
+# two maintainers, and open an issue if either check fails.
 name: Canary
 
 on:
   schedule:
-    - cron: "0 12 * * *"
+    - cron: "0 0 * * 1"
   workflow_dispatch:
 
 jobs:

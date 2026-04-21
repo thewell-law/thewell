@@ -1,8 +1,12 @@
+# Weekly scrape.
+# Stage 2+: this workflow will run the jurisdiction scrapers, diff
+# their output against data/, and open a pull request with any
+# changes. Scrapers never write directly to main.
 name: Scrape (weekly)
 
 on:
   schedule:
-    - cron: "0 6 * * 1"
+    - cron: "0 3 * * 0"
   workflow_dispatch:
 
 jobs:

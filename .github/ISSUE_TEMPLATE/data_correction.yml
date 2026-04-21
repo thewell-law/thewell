@@ -6,28 +6,31 @@ body:
   - type: markdown
     attributes:
       value: |
-        If you have a citation for the correct information, include it. Corrections without citations may be accepted but take longer to verify.
+        Corrections without citations may still be accepted, but they take longer to verify. Include a primary source if you can.
   - type: input
     id: page
     attributes:
-      label: Page URL or data file
-      description: e.g., https://thewell.example/j/jane-doe or data/j/jane-doe.yaml
+      label: Judge URL on our site
+      description: e.g., https://thewell.law/j/casd/jane-doe
     validations:
       required: true
-  - type: textarea
-    id: incorrect
+  - type: input
+    id: field
     attributes:
-      label: What is wrong?
+      label: Field that is wrong
+      description: e.g., page_limits.reply_brief, standing_order.url, chambers.phone_policy
     validations:
       required: true
   - type: textarea
     id: correct
     attributes:
-      label: What should it say?
+      label: Correct value
     validations:
       required: true
   - type: textarea
     id: citation
     attributes:
-      label: Citation
-      description: Primary sources strongly preferred.
+      label: Source citation
+      description: Primary sources strongly preferred (published order, docket entry, official calendar, etc.).
+    validations:
+      required: true

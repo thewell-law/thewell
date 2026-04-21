@@ -1,35 +1,39 @@
 name: Extractor bug
-description: A scraper is producing wrong output.
+description: A scraper produced wrong or missing output.
 title: "[extractor] "
 labels: ["bug", "scrapers"]
 body:
   - type: input
-    id: extractor
+    id: jurisdiction
     attributes:
-      label: Which extractor?
-      description: Path under scrapers/ or the jurisdiction name.
+      label: Jurisdiction
+      description: e.g., casd, cand, la-superior
+    validations:
+      required: true
+  - type: input
+    id: slug
+    attributes:
+      label: Judge slug
+      description: The judge identifier under data/, e.g., jane-doe
+    validations:
+      required: true
+  - type: input
+    id: field
+    attributes:
+      label: Field that failed to extract
+      description: e.g., page_limits.motion_in_limine
     validations:
       required: true
   - type: textarea
     id: expected
     attributes:
-      label: Expected output
+      label: Expected value
     validations:
       required: true
-  - type: textarea
-    id: actual
-    attributes:
-      label: Actual output
-    validations:
-      required: true
-  - type: textarea
-    id: repro
-    attributes:
-      label: Steps to reproduce
-    validations:
-      required: true
-  - type: textarea
+  - type: input
     id: source
     attributes:
-      label: Source document URL
-      description: Link to the upstream document the extractor is parsing.
+      label: Link to source PDF
+      description: URL of the upstream document the extractor was parsing.
+    validations:
+      required: true

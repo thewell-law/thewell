@@ -1,32 +1,33 @@
 name: Jurisdiction request
-description: Ask for a court, division, or judge we don't yet cover.
+description: Ask for a court we don't yet cover.
 title: "[jurisdiction] "
 labels: ["jurisdiction"]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Thanks for telling us what's missing. The more specific you are, the faster we can scope the work.
   - type: input
-    id: jurisdiction
+    id: court
     attributes:
-      label: Jurisdiction
-      description: State or country, and court (e.g., "California, Los Angeles County Superior Court, Stanley Mosk Courthouse").
+      label: Court name
+      description: e.g., California Superior Court, Santa Clara County
     validations:
       required: true
-  - type: textarea
+  - type: input
+    id: url
+    attributes:
+      label: Court URL
+    validations:
+      required: true
+  - type: input
     id: judges
     attributes:
-      label: Specific judges or divisions
-      description: Optional. Names, division numbers, or "all of it".
-  - type: textarea
-    id: sources
-    attributes:
-      label: Primary sources
-      description: Links to docket systems, calendars, opinion repositories, local rules, etc.
+      label: Approximate number of judges
     validations:
       required: true
-  - type: textarea
-    id: notes
+  - type: dropdown
+    id: volunteer
     attributes:
-      label: Anything else we should know?
+      label: Are you willing to help build this extractor?
+      options:
+        - "Yes"
+        - "No"
+    validations:
+      required: true
