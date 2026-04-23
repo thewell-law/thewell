@@ -1,0 +1,167 @@
+Effective February 4, 2025
+- 1 -
+HONORABLE CYNTHIA BASHANT, CHIEF JUDGE
+UNITED STATES DISTRICT COURT
+STANDING ORDER FOR CIVIL CASES
+Unless otherwise ordered by the Court, counsel and pro se litigants are expected to
+follow the Federal Rules of Civil Procedure, the Local Rules for the Southern
+District of California ("Civil Local Rules"), the Electronic Case Filing
+Administrative Policies and Procedures Manual ("ECF Manual"), and any other
+applicable rules. The Civil Local Rules and the ECF Manual are available on this
+district's website: casd.uscourts.gov. Failure to comply with the applicable orders
+and rules, including the ECF Manual, may result in the Court striking non-complying
+documents from the record pursuant to ECF Manual Section 2(a) and imposing
+sanctions pursuant to Civil Local Rule 83.1.
+1. Communications with Chambers
+A. Telephone Calls
+Parties seeking a hearing date for a motion must follow Section 4.B
+below. In light of the Court's procedure for selecting hearing dates,
+telephone calls to chambers are rarely necessary. Such calls may be
+made only by counsel with knowledge of the case. Calls from
+secretaries, legal assistants, paralegals, or parties represented by
+counsel are prohibited.
+Court personnel cannot interpret orders, discuss the merits of a case, or
+give legal advice, including advice on procedural matters. Court
+personnel also will not speculate as to when an order will be issued for
+a particular motion or ex parte application.
+When calling chambers, be prepared to identify your matter by case
+name and case number so your call can be directed to the appropriate
+law clerk. If your call is not answered, you may leave a voicemail,
+including your name, contact information, case number, and a detailed
+message.
+- 2 -
+B. Emails or Letters
+Emails or letters to chambers are prohibited unless otherwise
+authorized by the Court.
+2. General Filing Requirements
+The parties must comply with all of the formatting requirements in Civil Local
+Rule 5.1 unless otherwise ordered by the Court. In addition, the parties must
+scan any documents, including exhibits, to be filed on the docket using Optical
+Character Recognition ("OCR"). The OCR requirement only applies to
+parties with electronic-case-filing privileges.
+The Court's e-file email account (efile_bashant@casd.uscourts.gov) must
+only be used to lodge or submit proposed orders, required trial documents, or
+other documents requested by the Court. It is not to be used for
+communication purposes (e.g., asking questions).
+3. Discovery
+Counsel must contact the magistrate judge's chambers directly for all matters
+pertaining to discovery. Any objection to a discovery ruling of the magistrate
+judge must be filed as a motion pursuant to Civil Local Rule 7.1.
+4. Motion Practice
+A. Conference of Counsel Prior to Filing Noticed Motions
+Any party contemplating the filing of any noticed motion before this
+Court must first contact opposing counsel to discuss thoroughly-
+preferably in person-the substance of the contemplated motion and
+any potential resolution. The conference must take place at least seven
+days prior to the filing of the motion. If the parties are unable to reach
+a resolution that eliminates the need to file the anticipated motion,
+counsel for the moving party must include in the notice of motion a
+statement to the following effect: "This motion is made following the
+conference of counsel that took place on [date]."
+- 3 -
+The only exceptions to this meet-and-confer requirement are: (1) in
+cases where the plaintiff is appearing pro se and is not an attorney;
+(2) for applications for temporary restraining orders or preliminary
+injunctions; and (3) motions and cross-motions for summary judgment.
+Ex parte applications, which have separate requirements below, and
+joint motions are exempt from this rule as they are not noticed motions.
+B. Hearing Dates
+Parties filing a noticed motion may choose any Friday between thirty
+and sixty days from the motion's filing date. If the preferred Friday
+is a federal holiday, then the filing party may select the following
+Monday as the hearing date for the motion. Do not contact chambers
+for a hearing date. This rule only supersedes Civil Local Rule 7.1(b).
+Parties must also include the following language in the caption of their
+motions directly underneath the hearing date, unless notified otherwise
+by the Court: "NO ORAL ARGUMENT UNLESS ORDERED BY
+THE COURT." The Court may resolve motions on the papers
+submitted and without oral argument in accordance with Civil Local
+Rule 7.1(d)(1). Consequently, the hearing date does not indicate a date
+when appearances are necessary; rather, it sets the briefing schedule for
+the motion. As such, the filing party must not indicate a hearing time
+on its motion. The schedule for filing briefs must be in accordance with
+Civil Local Rule 7.1(e), unless ordered otherwise by the Court.
+Parties must contact the assigned magistrate judge's chambers for
+hearing and scheduling dates needed for cases referred-either by
+operation of local rule or by order-to the magistrate judge. See Civil
+Local Rules 72.2, 72.3.
+- 4 -
+C. Oral Argument
+i. Procedure
+If the Court decides to hear oral argument, it will issue an order,
+normally two weeks in advance, setting the matter for oral
+argument.
+For motions with numerous references to technical terminology
+(e.g., in patent cases), one week prior to the motion hearing, the
+parties must email to chambers (not to be filed) a list of pertinent
+technical terms and/or proper names, the purpose of which is to
+assist the court reporter in the transcription of the hearing.
+ii. Junior Attorneys
+Upon request, the Court will hold oral argument on a noticed
+motion handled by an attorney with no more than five years of
+experience. A request for oral argument under this provision
+should be included in a party's moving papers or opposition.
+Alternatively, a party may file the request separately before the
+Court rules on the motion.
+D. Proposed Orders
+Any proposed orders must be submitted in Word format simultaneously
+with all motions. In accordance with Section 2(h) of the ECF Manual,
+proposed orders must not contain the name and law firm information of
+the filing party, and must not contain the word "proposed" in the
+caption. Counsel must email proposed orders to opposing counsel and
+to efile_bashant@casd.uscourts.gov, and include the case name, case
+number, and docket number in the subject line of the email. The case
+number in the subject line must be in the following format, including
+hyphens: 21-cv-0270-BAS.
+Proposed orders or other documents requiring the judge's signature
+must not be filed on the docket.
+- 5 -
+E. Briefing
+When the same party is noticing multiple motions for the same hearing
+date, the motions must be briefed together in one memorandum of
+points and authorities. If multiple parties are moving for substantially
+the same relief, they must make every effort to obtain the same hearing
+date for their motions.
+F. Sur-Replies and Notices of Supplemental Authority
+Sur-replies and notices of supplemental authority may not be filed
+unless leave of court has been granted.
+G. Motions and Cross-Motions for Summary Judgment
+If upon being served with a summary-judgment motion an opposing
+party determines that it intends to file a cross-motion, that party must
+file an ex parte application requesting a consolidated briefing schedule
+well in advance of the due date for the opposition to the first-filed
+summary-judgment motion. The Court requires no duplication of
+briefing and exhibits.
+H. Exhibits
+The parties must avoid duplication of exhibits as much as possible. All
+exhibits submitted in support of motions should be excerpted to include
+only relevant material. All exhibits must be clearly labeled, dated, and
+indexed.
+J. Courtesy Copies
+No courtesy copies are necessary for any filings.
+K. Failure to Oppose
+An opposing party's failure to file an opposition to any motion may be
+construed as consent to the granting of the motion pursuant to Civil
+Local Rule 7.1(f)(3)(c).
+- 12 -
+12. Telephonic Appearances
+Telephonic appearances will be permitted only in emergency circumstances
+upon court approval. If a party needs to appear telephonically before this
+Court, he or she must contact chambers immediately upon learning of the
+emergency and leave a voicemail. Upon reviewing the voicemail, the Court
+will contact the party. The party needing to appear telephonically must,
+nonetheless, arrange to have a colleague appear on his or her behalf.
+13. Trial Practice
+A. Electronic Equipment for the Courtroom
+The Court provides the following audio/visual equipment: (1) monitors;
+(2) an overhead projector; and (3) computer connections. Counsel
+should make his or her own arrangements for their respective needs.
+Counsel should contact the Court's courtroom deputy to arrange a time
+to allow counsel to review and set up equipment for trial.
+E. Bench Trial
+Fourteen days before trial, counsel must serve and file proposed
+Findings of Fact and Conclusions of Law. An electronic copy must
+also be emailed to efile_bashant@casd.uscourts.gov in Word format.
+For a bench trial, the parties must submit a copy of the trial exhibits to
+chambers in an electronic-media format (e.g., USB flash drive) one day
+before trial is set to begin.

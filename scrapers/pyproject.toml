@@ -1,0 +1,30 @@
+[project]
+name = "thewell-scrapers"
+version = "0.1.0"
+description = "Rules-based scrapers that turn public court data into YAML for The Well."
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.27",
+    "beautifulsoup4>=4.12",
+    "pypdf>=4.0",
+    "pydantic[email]>=2.6",
+    "pyyaml>=6.0",
+    "click>=8.1",
+    "python-ulid>=2.2",
+    "tenacity>=8.2",
+    "rich>=13.7",
+    "jsonschema>=4.21",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8.0",
+    "pytest-httpx>=0.30",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [".", ".."]
