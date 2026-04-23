@@ -1,7 +1,13 @@
 # Weekly scrape.
-# Stage 2+: this workflow will run the jurisdiction scrapers, diff
-# their output against data/, and open a pull request with any
-# changes. Scrapers never write directly to main.
+#
+# IMPORTANT: this workflow pushes directly to `main`. It requires
+# github-actions[bot] to be on the branch-protection bypass list for
+# `main`. See docs/governance.md ("Who can push to main") for the
+# operational context. Without the bypass, the final `git push` step
+# will fail with a protected-branch error and the scraper's updates
+# will not land.
+#
+# Cadence: Sundays 03:00 UTC. Can be run manually via workflow_dispatch.
 name: Scrape (weekly)
 
 on:
@@ -10,8 +16,54 @@ on:
   workflow_dispatch:
 
 jobs:
-  scrape:
+  scrape-casd:
+    name: S.D. Cal.
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - name: Placeholder
-        run: echo "Weekly scrape job not yet configured."
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: astral-sh/setup-uv@v3
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        working-directory: scrapers
+        run: uv sync --extra test
+
+      - name: Run scraper
+        working-directory: scrapers
+        run: uv run python -m scrapers.casd
+
+      - name: Validate output
+        working-directory: scripts
+        run: |
+          uv sync
+          uv run python lint-judge-yaml.py
+
+      - name: Detect changes
+        id: diff
+        run: |
+          if git diff --quiet data/judges/casd/; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git diff --stat data/judges/casd/ >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Commit and push
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/judges/casd/
+          git commit -m "data(casd): weekly scrape update $(date -I)
+
+          Automated update from scrapers/casd. Review diff for any
+          unexpected changes."
+          git push origin main
