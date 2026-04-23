@@ -9,10 +9,12 @@ __pycache__/
 *.pyc
 .venv/
 .uv/
+.pytest_cache/
 site/dist/
 .astro/
 .cache/
 scrapers/*/.cache/
+scrapers/*/.audit/
 *.sqlite
 *.db
 
