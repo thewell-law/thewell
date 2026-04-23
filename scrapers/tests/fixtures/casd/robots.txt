@@ -1,0 +1,54 @@
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: *
+Disallow: /~_assets/cja-panel-application/
+Disallow: /App_Data/
+Disallow: /App_Code/
+Disallow: /~casd-portal/
+Disallow: /~BACKEND/
+Disallow: /_images/
+Disallow: /_img/
+Disallow: /_WebControls/
+Disallow: /_widgets/
+Disallow: /_MasterPages/
+Disallow: /~errorPage/
+Disallow: /css/
+Disallow: /bootstrap-tour-0.12.0/
+Disallow: /js/
+Disallow: /img/
+Disallow: /Bin/
+Disallow: /~casd-jobs/
+Disallow: /~simple-mode/
+Disallow: /_directions/
+Disallow: /_assets/
+Disallow: /~BACKEND/_dailycal/sealed/
+Disallow: /Enter-Code.aspx
+Disallow: Enter-Code.aspx
+Disallow: /ios-calendars/
+Disallow: /~checkin/
+Disallow: /software/
+Disallow: /software/downloads/
+Disallow: /software/CVB/
+Disallow: /software/More/
+Disallow: /Judges/
+Disallow: /~sp-portal/
+Disallow: /shared-video/
