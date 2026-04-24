@@ -129,7 +129,7 @@ Every fact needs a citation. Corrections without sources are indistinguishable f
 
 ## About
 
-The Well is maintained by Zack Pearson and the open-source community. It is operated by **The Well Legal Inc.**, a Delaware C-corporation.
+The Well is maintained by Zachary Brenner and the open-source community. It is operated solely by Zachary Brenner.
 
 <p align="center">
   <a href="https://thewell.law"><strong>thewell.law</strong></a>
