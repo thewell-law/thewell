@@ -1,3 +1,4 @@
+<p align="center">
 # The Well
 
 <p align="center">
