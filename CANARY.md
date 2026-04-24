@@ -3,14 +3,14 @@
 **Last updated:** 2026-04-21
 **Next update due:** 2026-04-28
 
-As of the date above, **The Well Legal Inc.** has NOT received:
+As of the date above, **Zachary Brenner** has NOT received:
 
 - Any National Security Letter.
 - Any FISA order or other classified legal process.
 - Any gag order, non-disclosure order, or similar directive preventing disclosure of legal process.
 - Any subpoena, warrant, court order, or informal request demanding contributor identity.
 
-The Well Legal Inc. retains sole control of this repository, the production deployment, the associated domains, and all operational credentials.
+Zachary Brenner retains sole control of this repository, the production deployment, the associated domains, and all operational credentials.
 
 ## Cadence
 
