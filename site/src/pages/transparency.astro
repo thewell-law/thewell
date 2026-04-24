@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Transparency"
+  description="What The Well does and does not log, store, or share."
+>
+  <h1 class="text-3xl mb-6">Transparency</h1>
+  <p class="mb-4">
+    The Well is operated with a deliberately narrow read path. This page
+    summarizes what the site does and does not do. See
+    <a
+      href="https://github.com/thewell/thewell/blob/main/docs/anonymity.md"
+      rel="noopener">docs/anonymity.md</a>
+    in the repository for the full threat model.
+  </p>
+  <h2 class="text-xl mt-8 mb-3">What we do not do</h2>
+  <ul class="mb-6 list-disc pl-6 space-y-1">
+    <li>We do not publish subjective opinions about judges.</li>
+    <li>We do not log IP addresses on contributor-facing endpoints.</li>
+    <li>We do not run analytics or session replay on those pages.</li>
+    <li>
+      We do not link specific contributions to specific contributors,
+      architecturally.
+    </li>
+  </ul>
+  <h2 class="text-xl mt-8 mb-3">What we do</h2>
+  <ul class="mb-6 list-disc pl-6 space-y-1">
+    <li>Judge pages are pre-rendered static HTML with no client-side JS.</li>
+    <li>
+      The site is served from Cloudflare Pages. Cloudflare's edge logs apply;
+      we do not add analytics on top.
+    </li>
+    <li>
+      Every field on a judge page is sourced, with links to the underlying
+      court document or the contribution record.
+    </li>
+  </ul>
+  <h2 class="text-xl mt-8 mb-3">Governance</h2>
+  <p class="mb-4">
+    See the <a href="/canary/">warrant canary</a> for the current status of
+    legal process against The Well Legal Inc.
+  </p>
+</Base>

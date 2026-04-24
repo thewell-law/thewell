@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Contribute"
+  description="How to contribute to The Well — as an attorney, a scraper author, or a data reviewer."
+>
+  <h1 class="text-3xl mb-6">Contribute</h1>
+  <p class="mb-4">
+    There are four ways to help.
+  </p>
+  <ol class="mb-6 list-decimal pl-6 space-y-2">
+    <li>
+      <strong>Add a jurisdiction.</strong> See <a
+        href="https://github.com/thewell/thewell/blob/main/CONTRIBUTING.md"
+        rel="noopener">CONTRIBUTING.md</a>.
+    </li>
+    <li>
+      <strong>Improve an extractor.</strong> Open a PR against
+      <code>scrapers/common/extractors.py</code>.
+    </li>
+    <li>
+      <strong>Correct a judge card.</strong> File an issue with the
+      <code>data:correction</code> label, or open a PR against the YAML.
+    </li>
+    <li>
+      <strong>Contribute as an attorney.</strong> California-barred attorneys
+      can apply below. Applications are manually reviewed.
+    </li>
+  </ol>
+  <h2 class="text-xl mt-8 mb-3">Attorney applications</h2>
+  <p class="mb-4" style="color: var(--color-muted)">
+    The attorney application portal is not yet open. Check back soon.
+  </p>
+</Base>

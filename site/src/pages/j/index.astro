@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getJurisdictions } from '../../lib/judges';
+
+const jurisdictions = getJurisdictions();
+---
+<Base title="Judges" description="Browse judges by jurisdiction.">
+  <h1 class="text-3xl mb-6">Judges</h1>
+  {jurisdictions.length === 0 ? (
+    <p style="color: var(--color-muted)">
+      Judge pages are not yet published. The first jurisdiction (S.D. Cal.) is
+      in preparation.
+    </p>
+  ) : (
+    <ul>
+      {jurisdictions.map((j) => (
+        <li class="mb-2">
+          <a href={`/j/${j.slug}/`}>{j.name}</a>
+          <span class="ml-2 text-sm" style="color: var(--color-muted)">
+            ({j.count})
+          </span>
+        </li>
+      ))}
+    </ul>
+  )}
+</Base>

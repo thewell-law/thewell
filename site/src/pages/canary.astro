@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Warrant Canary"
+  description="The Well's warrant canary. Updated weekly."
+>
+  <h1 class="text-3xl mb-6">Warrant Canary</h1>
+  <p class="mb-2"><strong>Last updated:</strong> 2026-04-21</p>
+  <p class="mb-6"><strong>Next update due:</strong> 2026-04-28</p>
+  <p class="mb-4">
+    As of the date above, <strong>The Well Legal Inc.</strong> has NOT
+    received:
+  </p>
+  <ul class="mb-6 list-disc pl-6 space-y-1">
+    <li>Any National Security Letter.</li>
+    <li>Any FISA order or other classified legal process.</li>
+    <li>
+      Any gag order, non-disclosure order, or similar directive preventing
+      disclosure of legal process.
+    </li>
+    <li>
+      Any subpoena, warrant, court order, or informal request demanding
+      contributor identity.
+    </li>
+  </ul>
+  <p class="mb-4">
+    The Well Legal Inc. retains sole control of this repository, the production
+    deployment, the associated domains, and all operational credentials.
+  </p>
+  <h2 class="text-xl mt-8 mb-3">Cadence</h2>
+  <p class="mb-4">
+    This canary is updated <strong>weekly</strong>. If this file is not updated
+    by the "Next update due" date above, or if any of the statements above are
+    removed, qualified, or reworded, readers should assume that at least one of
+    the statements above is no longer true.
+  </p>
+  <p class="mb-4 text-sm" style="color: var(--color-muted)">
+    Each weekly update will be signed by at least two maintainers using PGP.
+    Until production signing infrastructure is established, treat the canary as
+    informational.
+  </p>
+</Base>
