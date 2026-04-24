@@ -4,7 +4,7 @@
 
 The Well is a free-to-read database of how federal and California state judges run their courtrooms — their standing orders, filing preferences, motion practice cadence, and oral argument tendencies. The data is maintained by verified California-barred attorneys who contribute observations anonymously.
 
-Read the site: [thewell.law](https://thewell.law) *(coming soon)*
+Read the site: [thewell.law](https://the-well-8ch.pages.dev) *(coming soon)*
 
 ## Why
 
