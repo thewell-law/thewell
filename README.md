@@ -1,5 +1,4 @@
-<p align="center">
-  ## The Well
+# The Well
 
 <p align="center">
   <strong>Know your judge before you walk into the courtroom.</strong>
