@@ -3,33 +3,142 @@ import Base from '../layouts/Base.astro';
 ---
 <Base
   title="Contribute"
-  description="How to contribute to The Well — as an attorney, a scraper author, or a data reviewer."
+  description="How to contribute to The Well — as an attorney, a scraper author, a data reviewer, or a sponsor."
 >
-  <h1 class="text-3xl mb-6">Contribute</h1>
-  <p class="mb-4">
-    There are four ways to help.
-  </p>
-  <ol class="mb-6 list-decimal pl-6 space-y-2">
-    <li>
-      <strong>Add a jurisdiction.</strong> See <a
-        href="https://github.com/thewell/thewell/blob/main/CONTRIBUTING.md"
-        rel="noopener">CONTRIBUTING.md</a>.
-    </li>
-    <li>
-      <strong>Improve an extractor.</strong> Open a PR against
-      <code>scrapers/common/extractors.py</code>.
-    </li>
-    <li>
-      <strong>Correct a judge card.</strong> File an issue with the
-      <code>data:correction</code> label, or open a PR against the YAML.
-    </li>
-    <li>
-      <strong>Contribute as an attorney.</strong> California-barred attorneys
-      can apply below. Applications are manually reviewed.
-    </li>
-  </ol>
-  <h2 class="text-xl mt-8 mb-3">Attorney applications</h2>
-  <p class="mb-4" style="color: var(--color-muted)">
-    The attorney application portal is not yet open. Check back soon.
-  </p>
+  <article class="reference-page">
+    <header class="page-heading">
+      <h1>Contribute</h1>
+      <p>
+        The Well grows through public contributions. There are five paths,
+        depending on what you can offer. All contributions are welcome under
+        the project licenses.
+      </p>
+    </header>
+
+    <section>
+      <h2>1. Add a jurisdiction</h2>
+      <p>
+        Each new court requires a scraper that fetches the judge index, the
+        standing orders, and the chambers-rules pages, plus extractors that
+        parse those documents into the YAML schema.
+      </p>
+      <p>
+        Start with the
+        <a
+          href="https://github.com/thewell/thewell/blob/main/CONTRIBUTING.md"
+          rel="noopener">contributing guide</a>
+        and the existing CASD scraper at
+        <code>scrapers/casd/</code> as a reference implementation. The scraper
+        must produce YAML that validates against
+        <a
+          href="https://github.com/thewell/thewell/blob/main/docs/schema.md"
+          rel="noopener">the schema</a>.
+      </p>
+    </section>
+
+    <section>
+      <h2>2. Improve an extractor</h2>
+      <p>
+        The shared extractors at <code>scrapers/common/extractors.py</code>
+        turn standing-order text into structured procedural fields. Improving
+        them — better page-limit detection, more accurate cadence inference,
+        new topic tags — improves every judge page in every jurisdiction.
+        Tests are required for all extractor changes; fixtures live in
+        <code>scrapers/common/tests/fixtures/</code>.
+      </p>
+    </section>
+
+    <section>
+      <h2>3. Correct a judge card</h2>
+      <p>
+        Errors happen — court pages move, standing orders are revised, a
+        regex misses an edge case. Two ways to flag a correction:
+      </p>
+      <ul class="judge-link-list">
+        <li>
+          <strong>File an issue</strong>
+          <span>Open a GitHub issue with the <code>data:correction</code> label. Include the judge page URL, the field, the current value, and a citation for the correct value.</span>
+        </li>
+        <li>
+          <strong>Open a pull request</strong>
+          <span>Edit the YAML in <code>data/judges/{'{jurisdiction}'}/</code> and update the matching <code>sources</code> entry. CI will reject changes that lack a citation.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. Contribute as an attorney</h2>
+      <p>
+        California-barred attorneys can contribute observations from courtrooms
+        they have appeared in. Observations cover the things that do not appear
+        in standing orders: how strictly a judge enforces meet-and-confer,
+        actual oral-argument length, whether chambers will field a quick
+        scheduling question by phone.
+      </p>
+      <p>
+        Applications are manually reviewed against active California State Bar
+        records. Verified contributors receive a credential that submits
+        observations through a path designed so that no operator — including
+        the maintainer — can link a specific observation to a specific
+        contributor. See
+        <a
+          href="https://github.com/thewell/thewell/blob/main/docs/anonymity.md"
+          rel="noopener">docs/anonymity.md</a>
+        for the architecture.
+      </p>
+      <p style="color: var(--color-muted)">
+        The attorney application portal is not yet open. Check back soon, or
+        watch the repository for the announcement.
+      </p>
+    </section>
+
+    <section>
+      <h2>5. Sponsor the project</h2>
+      <p>
+        The Well does not run advertising or take commercial partnerships.
+        Voluntary
+        <a href="https://github.com/sponsors/zackpearson" rel="noopener">GitHub Sponsors</a>
+        contributions fund domain renewals, optional infrastructure beyond
+        Cloudflare's free tier, and bug-bounty payouts. Sponsorship does not
+        confer editorial influence.
+      </p>
+    </section>
+
+    <section>
+      <h2>What does not count as a contribution</h2>
+      <ul class="judge-link-list">
+        <li>
+          <strong>Subjective opinions.</strong>
+          <span>The Well does not publish ratings, ideological labels, or commentary on outcomes.</span>
+        </li>
+        <li>
+          <strong>Unsourced facts.</strong>
+          <span>Every procedural field requires a citation — a court URL, a standing-order PDF, a PACER-derived statistic, or an aggregated contributor observation.</span>
+        </li>
+        <li>
+          <strong>AI-generated content.</strong>
+          <span>Submissions produced by language models are out of scope. Extractors must be deterministic.</span>
+        </li>
+        <li>
+          <strong>Litigant-side commentary.</strong>
+          <span>Observations from parties, not their counsel, are out of scope.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Code of conduct and security</h2>
+      <p>
+        Contributors are expected to follow the
+        <a
+          href="https://github.com/thewell/thewell/blob/main/CODE_OF_CONDUCT.md"
+          rel="noopener">code of conduct</a>.
+        Security findings should be disclosed under
+        <a
+          href="https://github.com/thewell/thewell/blob/main/SECURITY.md"
+          rel="noopener">SECURITY.md</a>;
+        cash rewards are available for qualifying reports.
+      </p>
+    </section>
+  </article>
 </Base>

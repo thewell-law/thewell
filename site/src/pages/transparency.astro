@@ -5,40 +5,120 @@ import Base from '../layouts/Base.astro';
   title="Transparency"
   description="What The Well does and does not log, store, or share."
 >
-  <h1 class="text-3xl mb-6">Transparency</h1>
-  <p class="mb-4">
-    The Well is operated with a deliberately narrow read path. This page
-    summarizes what the site does and does not do. See
-    <a
-      href="https://github.com/thewell/thewell/blob/main/docs/anonymity.md"
-      rel="noopener">docs/anonymity.md</a>
-    in the repository for the full threat model.
-  </p>
-  <h2 class="text-xl mt-8 mb-3">What we do not do</h2>
-  <ul class="mb-6 list-disc pl-6 space-y-1">
-    <li>We do not publish subjective opinions about judges.</li>
-    <li>We do not log IP addresses on contributor-facing endpoints.</li>
-    <li>We do not run analytics or session replay on those pages.</li>
-    <li>
-      We do not link specific contributions to specific contributors,
-      architecturally.
-    </li>
-  </ul>
-  <h2 class="text-xl mt-8 mb-3">What we do</h2>
-  <ul class="mb-6 list-disc pl-6 space-y-1">
-    <li>Judge pages are pre-rendered static HTML with no client-side JS.</li>
-    <li>
-      The site is served from Cloudflare Pages. Cloudflare's edge logs apply;
-      we do not add analytics on top.
-    </li>
-    <li>
-      Every field on a judge page is sourced, with links to the underlying
-      court document or the contribution record.
-    </li>
-  </ul>
-  <h2 class="text-xl mt-8 mb-3">Governance</h2>
-  <p class="mb-4">
-    See the <a href="/canary/">warrant canary</a> for the current status of
-    legal process against Zachary Brenner.
-  </p>
+  <article class="reference-page">
+    <header class="page-heading">
+      <h1>Transparency</h1>
+      <p>
+        The Well is operated with a deliberately narrow read path. This page
+        summarizes what the site does and does not do. The
+        <a
+          href="https://github.com/thewell/thewell/blob/main/docs/anonymity.md"
+          rel="noopener">anonymity model</a>
+        and
+        <a
+          href="https://github.com/thewell/thewell/blob/main/docs/threat-model.md"
+          rel="noopener">threat model</a>
+        in the repository describe the underlying architecture.
+      </p>
+    </header>
+
+    <section>
+      <h2>What we do not do</h2>
+      <ul class="judge-link-list">
+        <li>
+          <strong>No subjective ratings.</strong>
+          <span>The Well does not publish opinions, scores, or ideological labels about judges. Entries describe procedure and cite sources.</span>
+        </li>
+        <li>
+          <strong>No IP logging on contributor endpoints.</strong>
+          <span>The contribution path does not record IP addresses, user agents, or session identifiers tied to submissions.</span>
+        </li>
+        <li>
+          <strong>No analytics.</strong>
+          <span>No analytics scripts, no session replay, no behavioral telemetry on any reader-facing or contributor-facing page.</span>
+        </li>
+        <li>
+          <strong>No identity-to-contribution linkage.</strong>
+          <span>The submission path is architected so that no operator — including the maintainer — can link a specific observation to a specific verified contributor. Aggregation is mandatory before publication.</span>
+        </li>
+        <li>
+          <strong>No AI in the data pipeline.</strong>
+          <span>Extractors are deterministic — regex and structural HTML parsing. No language model writes, paraphrases, or summarizes data.</span>
+        </li>
+        <li>
+          <strong>No third-party trackers.</strong>
+          <span>The site loads no third-party JavaScript, no advertising pixels, no embedded widgets that would leak referrers.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>What we do</h2>
+      <ul class="judge-link-list">
+        <li>
+          <strong>Static, pre-rendered pages.</strong>
+          <span>Judge pages are HTML rendered at build time. There is no client-side JavaScript on judge pages and no runtime database.</span>
+        </li>
+        <li>
+          <strong>Cloudflare Pages hosting.</strong>
+          <span>The site is served from Cloudflare Pages. Cloudflare's edge logs apply at the hosting layer; the site adds no analytics or instrumentation on top.</span>
+        </li>
+        <li>
+          <strong>Source-cited fields.</strong>
+          <span>Every field on a judge page links to its source — a court URL, a standing-order PDF, a PACER-derived statistic, or an aggregated contributor observation.</span>
+        </li>
+        <li>
+          <strong>Public build.</strong>
+          <span>The repository is public. Scrapers commit changes as Git diffs that anyone can audit. There is no private editorial layer.</span>
+        </li>
+        <li>
+          <strong>Bug bounty.</strong>
+          <span>Cash rewards are available for security findings under <a href="https://github.com/thewell/thewell/blob/main/SECURITY.md" rel="noopener">SECURITY.md</a>.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Data minimization</h2>
+      <p>
+        The Well only stores data that is necessary to publish judge pages.
+        Contributor verification produces a credential, not a dossier; once a
+        verification is complete, only the credential's status (active or
+        revoked) is retained. Submission payloads contain procedural
+        observations and nothing about the submitter.
+      </p>
+    </section>
+
+    <section>
+      <h2>Operational controls</h2>
+      <ul class="judge-link-list">
+        <li>
+          <strong>Sole operator.</strong>
+          <span>Zachary Brenner retains sole control of the source repository, the production deployment, the associated domains, and all operational credentials.</span>
+        </li>
+        <li>
+          <strong>Warrant canary.</strong>
+          <span>The <a href="/canary/">warrant canary</a> is updated weekly. Removal, qualification, or non-update of the canary should be treated as a signal.</span>
+        </li>
+        <li>
+          <strong>Public disclosure.</strong>
+          <span>Material changes to data handling, hosting, or governance are announced in the repository changelog before they take effect, where possible.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Reporting concerns</h2>
+      <p>
+        Privacy concerns, data corrections, and security disclosures are
+        triaged through the public repository under their respective labels.
+        See
+        <a
+          href="https://github.com/thewell/thewell/blob/main/SECURITY.md"
+          rel="noopener">SECURITY.md</a>
+        for security disclosures and the
+        <a href="/contribute/">contribute</a> page for data corrections.
+      </p>
+    </section>
+  </article>
 </Base>

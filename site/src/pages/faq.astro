@@ -1,0 +1,196 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="FAQ"
+  description="Frequently asked questions about The Well — scope, sourcing, contribution, anonymity, and use."
+>
+  <article class="reference-page">
+    <header class="page-heading">
+      <h1>FAQ</h1>
+      <p>
+        Common questions about what The Well is, how it sources its data,
+        how contributors are protected, and how to use the database.
+      </p>
+    </header>
+
+    <section>
+      <h2>Scope</h2>
+
+      <h3 class="text-lg mt-6 mb-2">What courts does The Well cover?</h3>
+      <p>
+        The initial scope is the U.S. District Court for the Southern District
+        of California. Coverage will expand to additional federal district
+        courts in California, the Ninth Circuit, and large California state
+        superior courts. See the <a href="/coverage/">coverage and roadmap</a>
+        page for the current state.
+      </p>
+
+      <h3 class="text-lg mt-6 mb-2">Will you cover federal courts outside California?</h3>
+      <p>
+        Probably, eventually. The schema is jurisdiction-agnostic. Adding a
+        new district requires a scraper for that court's published materials,
+        an extractor configuration, and contributors who practice there. The
+        project welcomes pull requests that add new jurisdictions.
+      </p>
+
+      <h3 class="text-lg mt-6 mb-2">Why not include state appellate or magistrate judges?</h3>
+      <p>
+        They are in scope, but ordering matters. The first tranche is the
+        bench most heavily used by California-based federal civil litigators.
+        Other roles will follow as scrapers and contributor coverage are added.
+      </p>
+
+      <h3 class="text-lg mt-6 mb-2">Does The Well rate or rank judges?</h3>
+      <p>
+        No. The Well does not publish subjective ratings, ideological labels,
+        or commentary on outcomes. Pages describe procedure and cite sources.
+      </p>
+    </section>
+
+    <section>
+      <h2>Sourcing</h2>
+
+      <h3 class="text-lg mt-6 mb-2">Where does the data come from?</h3>
+      <p>
+        Four source types: court websites and standing orders (parsed with
+        deterministic extractors), PACER-derived statistics (motion-ruling
+        cadence, bench-ruling rate), and aggregated observations from verified
+        California-barred attorneys. Every field on a judge page is tagged
+        with the source type it came from.
+      </p>
+
+      <h3 class="text-lg mt-6 mb-2">Does The Well use AI to summarize judges?</h3>
+      <p>
+        No. Extractors are regex and structural HTML parsing. No language
+        model writes, paraphrases, or summarizes anything in the data
+        pipeline. The decision is deliberate; see the
+        <a href="/methodology/">methodology</a> page.
+      </p>
+
+      <h3 class="text-lg mt-6 mb-2">How fresh is the data?</h3>
+      <p>
+        Scrapers run on a weekly schedule. Each standing order and each
+        procedural field carries a <em>last fetched</em> or
+        <em>last verified</em> timestamp. Stale fields are flagged in the
+        review queue for re-scraping.
+      </p>
+
+      <h3 class="text-lg mt-6 mb-2">A judge page is wrong. How do I fix it?</h3>
+      <p>
+        Open an issue with the <code>data:correction</code> label or a pull
+        request against the YAML in
+        <code>data/judges/{'{jurisdiction}'}/</code>. Either way, include a
+        citation. Corrections without citations are indistinguishable from
+        rumors and will not be merged.
+      </p>
+    </section>
+
+    <section>
+      <h2>Contribution and anonymity</h2>
+
+      <h3 class="text-lg mt-6 mb-2">Who can contribute observations?</h3>
+      <p>
+        Active California-barred attorneys, after a manual verification
+        against State Bar records. Verification produces a credential; the
+        credential then submits observations through a path designed to
+        prevent linkage between contributor and observation.
+      </p>
+
+      <h3 class="text-lg mt-6 mb-2">How is contributor identity protected?</h3>
+      <p>
+        Architecturally — meaning the system is built so that no operator,
+        including the maintainer, can link a specific observation to a
+        specific contributor. See
+        <a
+          href="https://github.com/thewell/thewell/blob/main/docs/anonymity.md"
+          rel="noopener">docs/anonymity.md</a>
+        for the design.
+      </p>
+
+      <h3 class="text-lg mt-6 mb-2">Can a court order or subpoena unmask a contributor?</h3>
+      <p>
+        The architecture is designed so that the data the operator holds does
+        not contain the linkage. The
+        <a
+          href="https://github.com/thewell/thewell/blob/main/docs/threat-model.md"
+          rel="noopener">threat model</a>
+        describes what the project defends against and what it does not, and
+        the <a href="/canary/">warrant canary</a> tracks legal process directed
+        at the operator.
+      </p>
+
+      <h3 class="text-lg mt-6 mb-2">Can I contribute without being a barred attorney?</h3>
+      <p>
+        Yes — by adding jurisdictions, improving scrapers and extractors,
+        correcting cards with citations, or filing issues. Observation-style
+        contributions from courtroom appearances are limited to verified
+        attorneys.
+      </p>
+    </section>
+
+    <section>
+      <h2>Use</h2>
+
+      <h3 class="text-lg mt-6 mb-2">Can I cite The Well in a brief?</h3>
+      <p>
+        You can, but verify with primary sources first. Standing orders and
+        local rules are linked from each judge page; cite those. The Well is
+        a navigation layer for those primary sources, not a substitute for
+        them.
+      </p>
+
+      <h3 class="text-lg mt-6 mb-2">Can I redistribute the data?</h3>
+      <p>
+        Yes. The data is licensed under
+        <a
+          href="https://github.com/thewell/thewell/blob/main/LICENSE-DATA"
+          rel="noopener">CC-BY-SA 4.0</a>.
+        Attribute The Well and share derivatives under the same license.
+      </p>
+
+      <h3 class="text-lg mt-6 mb-2">Can I use The Well's code in my own project?</h3>
+      <p>
+        Yes, under
+        <a
+          href="https://github.com/thewell/thewell/blob/main/LICENSE"
+          rel="noopener">AGPL-3.0</a>.
+        If you operate a modified version as a network service, you must
+        publish your modifications under the same license.
+      </p>
+
+      <h3 class="text-lg mt-6 mb-2">Can I scrape this site?</h3>
+      <p>
+        Please clone the repository instead. The data is published as YAML in
+        <code>data/judges/</code>; the schema is stable and versioned. Scraping
+        the rendered HTML adds load to Cloudflare's edge for no benefit.
+      </p>
+    </section>
+
+    <section>
+      <h2>Project</h2>
+
+      <h3 class="text-lg mt-6 mb-2">Who runs The Well?</h3>
+      <p>
+        The Well is operated solely by Zachary Brenner. See the
+        <a href="/about/">about</a> page for governance and the
+        <a href="/canary/">warrant canary</a> for current operator status.
+      </p>
+
+      <h3 class="text-lg mt-6 mb-2">How is The Well funded?</h3>
+      <p>
+        Voluntary
+        <a href="https://github.com/sponsors/zackpearson" rel="noopener">GitHub Sponsors</a>
+        contributions plus the maintainer's own resources. No advertising,
+        no commercial partnerships, no editorial influence from funders.
+      </p>
+
+      <h3 class="text-lg mt-6 mb-2">Is The Well affiliated with any court, bar, or firm?</h3>
+      <p>
+        No. The Well is an independent open-source project. It is not
+        endorsed by, sponsored by, or affiliated with any court, the State
+        Bar of California, or any law firm.
+      </p>
+    </section>
+  </article>
+</Base>

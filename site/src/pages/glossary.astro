@@ -1,0 +1,210 @@
+---
+import Base from '../layouts/Base.astro';
+
+interface GlossaryEntry {
+  term: string;
+  definition: string;
+  values?: { value: string; meaning: string }[];
+}
+
+const procedural: GlossaryEntry[] = [
+  {
+    term: 'Page-limit strictness',
+    definition: 'How strictly the judge enforces default page limits set by local rules and standing orders.',
+    values: [
+      { value: 'Strict', meaning: 'Page limits enforced as written. Over-length filings struck or rejected.' },
+      { value: 'Strict with leave', meaning: 'Page limits enforced, but ex parte applications for additional pages routinely granted on showing.' },
+      { value: 'Lenient', meaning: 'Modest overruns tolerated without leave; substantial overruns require permission.' },
+    ],
+  },
+  {
+    term: 'Courtesy copies required',
+    definition: 'Whether chambers requires a paper or PDF copy of filings beyond the electronic docket.',
+    values: [
+      { value: 'Required', meaning: 'Courtesy copies must accompany every filing per the standing order.' },
+      { value: 'On request', meaning: 'Chambers requests courtesy copies on a case-by-case basis.' },
+      { value: 'Not required', meaning: 'No courtesy copies; the electronic filing is sufficient.' },
+    ],
+  },
+  {
+    term: 'Motion-ruling cadence',
+    definition: 'How quickly the judge typically rules on fully briefed contested motions, derived from PACER docket data.',
+    values: [
+      { value: 'Under 30 days', meaning: 'Median submission-to-order interval below 30 days.' },
+      { value: '30 to 60 days', meaning: 'Median submission-to-order interval between 30 and 60 days.' },
+      { value: '60 to 120 days', meaning: 'Median submission-to-order interval between 60 and 120 days.' },
+      { value: 'Over 120 days', meaning: 'Median submission-to-order interval above 120 days.' },
+    ],
+  },
+  {
+    term: 'Rules from bench',
+    definition: 'How often the judge issues an oral ruling at the hearing rather than taking the matter under submission.',
+    values: [
+      { value: 'Routinely', meaning: 'Bench ruling on a majority of contested motions.' },
+      { value: 'Occasionally', meaning: 'Bench ruling in a meaningful minority of contested motions.' },
+      { value: 'Rarely', meaning: 'Almost always takes contested motions under submission.' },
+    ],
+  },
+  {
+    term: 'Oral argument default',
+    definition: 'Whether the judge holds oral argument on dispositive motions absent a specific request to vacate.',
+    values: [
+      { value: 'Heard by default', meaning: 'Argument is heard on dispositive motions unless the court vacates the hearing.' },
+      { value: 'Submitted by default', meaning: 'Motions are decided on the papers unless argument is set on the court\'s own motion or counsel\'s request.' },
+      { value: 'Case by case', meaning: 'Whether argument is held varies by motion type and complexity.' },
+    ],
+  },
+  {
+    term: 'Bench engagement',
+    definition: 'How actively the judge questions counsel during oral argument.',
+    values: [
+      { value: 'Hot bench', meaning: 'Sustained, probing questioning throughout argument.' },
+      { value: 'Moderate questioning', meaning: 'Targeted questions on disputed points; otherwise listens.' },
+      { value: 'Cold bench', meaning: 'Few or no questions; counsel argues largely uninterrupted.' },
+    ],
+  },
+  {
+    term: 'Junior-attorney argument',
+    definition: 'Whether the judge\'s standing order or practice encourages junior counsel to present argument.',
+    values: [
+      { value: 'Encourages via standing order', meaning: 'Standing order explicitly invites junior counsel who drafted briefs to argue them.' },
+      { value: 'Welcomes on request', meaning: 'No written policy, but court honors requests to have junior counsel argue.' },
+      { value: 'No stated policy', meaning: 'Neither encouraged nor discouraged in writing.' },
+    ],
+  },
+  {
+    term: 'Chambers direct contact',
+    definition: 'Whether and how counsel may contact chambers directly.',
+    values: [
+      { value: 'Procedural only', meaning: 'Chambers (typically via the courtroom deputy) takes scheduling and procedural inquiries; no substantive contact.' },
+      { value: 'Discouraged', meaning: 'Chambers does not field calls; route inquiries through the docket or the courtroom deputy.' },
+      { value: 'Open', meaning: 'Chambers takes procedural calls without restriction; substantive matters still belong on the docket.' },
+    ],
+  },
+  {
+    term: 'Telephonic appearance',
+    definition: 'Whether counsel may appear by telephone for non-evidentiary matters.',
+    values: [
+      { value: 'Permitted with notice', meaning: 'Allowed with advance notice to chambers (often 24 hours).' },
+      { value: 'Permitted by leave', meaning: 'Requires an ex parte application or a court order.' },
+      { value: 'Not permitted', meaning: 'In-person appearance required.' },
+    ],
+  },
+  {
+    term: 'Zoom hearings',
+    definition: 'The judge\'s posture toward remote video hearings.',
+    values: [
+      { value: 'Default remote', meaning: 'Most non-evidentiary hearings held by video.' },
+      { value: 'Hybrid by request', meaning: 'Video offered on request; in-person remains the default for evidentiary matters.' },
+      { value: 'In person only', meaning: 'Hearings held in person except in unusual circumstances.' },
+    ],
+  },
+  {
+    term: 'Electronic exhibits at trial',
+    definition: 'Whether the courtroom is set up for, and the judge prefers, electronic presentation of trial exhibits.',
+    values: [
+      { value: 'Preferred', meaning: 'Court prefers electronic presentation; counsel should confirm capability in advance.' },
+      { value: 'Permitted', meaning: 'Allowed alongside paper exhibits without preference.' },
+      { value: 'Paper preferred', meaning: 'Court prefers paper exhibit binders and physical presentation.' },
+    ],
+  },
+  {
+    term: 'Enforces meet and confer',
+    definition: 'How strictly the judge enforces meet-and-confer requirements before discovery and other motion practice.',
+    values: [
+      { value: 'Strictly enforced', meaning: 'Motions filed without documented meet-and-confer are denied or struck.' },
+      { value: 'Routinely enforced', meaning: 'Court will require remediation before reaching the merits.' },
+      { value: 'Loosely enforced', meaning: 'Some flexibility, but the court expects the requirement to have been observed.' },
+    ],
+  },
+];
+
+const sourceTypes: GlossaryEntry[] = [
+  {
+    term: 'Standing order',
+    definition: 'A written order issued by the judge, published on the court\'s website, that governs procedure in cases assigned to that judge.',
+  },
+  {
+    term: 'Local rule',
+    definition: 'A rule adopted by the district or circuit governing all matters in that court. Linked but not duplicated on judge pages.',
+  },
+  {
+    term: 'PACER-derived statistic',
+    definition: 'A field computed from public PACER docket data — for example, motion-ruling cadence or bench-ruling rate over a defined period.',
+  },
+  {
+    term: 'Court website',
+    definition: 'A field copied verbatim from the court\'s own published procedure or chambers-rules page, with the source link preserved.',
+  },
+  {
+    term: 'Aggregated observation',
+    definition: 'A field derived from multiple verified-attorney observations after aggregation. Individual observations are never published.',
+  },
+];
+---
+<Base
+  title="Glossary"
+  description="Definitions of the field values used on judge pages — page-limit strictness, motion-ruling cadence, oral argument defaults, and source types."
+>
+  <article class="reference-page">
+    <header class="page-heading">
+      <h1>Glossary</h1>
+      <p>
+        Definitions of the field values used on judge pages. Field values
+        are normalized so that the same term means the same thing across
+        every jurisdiction.
+      </p>
+    </header>
+
+    <section>
+      <h2>Procedural fields</h2>
+      <div class="index-list">
+        {procedural.map((entry) => (
+          <section>
+            <h2>{entry.term}</h2>
+            <p>{entry.definition}</p>
+            {entry.values && (
+              <dl class="detail-list">
+                {entry.values.map((v) => (
+                  <>
+                    <dt>{v.value}</dt>
+                    <dd>{v.meaning}</dd>
+                  </>
+                ))}
+              </dl>
+            )}
+          </section>
+        ))}
+      </div>
+    </section>
+
+    <section>
+      <h2>Source types</h2>
+      <p>
+        Each procedural field is tagged with the source type it came from.
+        The source type appears next to the field on the judge page.
+      </p>
+      <div class="index-list">
+        {sourceTypes.map((entry) => (
+          <section>
+            <h2>{entry.term}</h2>
+            <p>{entry.definition}</p>
+          </section>
+        ))}
+      </div>
+    </section>
+
+    <section>
+      <h2>Schema</h2>
+      <p>
+        The full machine-readable schema lives at
+        <code>data/schema/judge.schema.json</code> in the source repository.
+        See
+        <a
+          href="https://github.com/thewell/thewell/blob/main/docs/schema.md"
+          rel="noopener">docs/schema.md</a>
+        for the field-by-field reference.
+      </p>
+    </section>
+  </article>
+</Base>

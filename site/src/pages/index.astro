@@ -26,8 +26,12 @@ const jurisdictions = getJurisdictions();
         <dd>{judges.length}</dd>
         <dt>Jurisdictions</dt>
         <dd>{jurisdictions.length}</dd>
-        <dt>Data policy</dt>
-        <dd>Every published procedural field must cite a source.</dd>
+        <dt>Code license</dt>
+        <dd>AGPL-3.0</dd>
+        <dt>Data license</dt>
+        <dd>CC-BY-SA 4.0</dd>
+        <dt>Sourcing rule</dt>
+        <dd>Every published procedural field cites a source.</dd>
       </dl>
     </section>
 
@@ -40,17 +44,100 @@ const jurisdictions = getJurisdictions();
         rules quickly and compare practice across courtrooms.
       </p>
       <p>
-        The project avoids subjective ratings. Entries should describe
-        procedures and cite where each fact came from.
+        Junior attorneys walk into courtrooms without the mental file every
+        senior partner keeps: page-limit strictness, whether chambers takes
+        phone calls, how long oral argument really runs. The information is
+        already public, but reading and cross-referencing it for a hundred
+        judges is a week of work nobody has time for. The Well is that week
+        of work, done once, in the open.
       </p>
     </section>
 
     <section>
-      <h2>Browse</h2>
+      <h2>What a judge page contains</h2>
+      <ul class="judge-link-list">
+        <li>
+          <strong>Standing orders.</strong>
+          <span>Each published order is linked, dated, and tagged by topic.</span>
+        </li>
+        <li>
+          <strong>Filing preferences.</strong>
+          <span>Page limits, courtesy-copy format, page-limit strictness.</span>
+        </li>
+        <li>
+          <strong>Motion practice.</strong>
+          <span>Median ruling cadence, bench-ruling rate, meet-and-confer enforcement.</span>
+        </li>
+        <li>
+          <strong>Oral argument.</strong>
+          <span>Default treatment, typical length, bench engagement, junior-attorney encouragement.</span>
+        </li>
+        <li>
+          <strong>Communication.</strong>
+          <span>Chambers contact policy, telephonic appearance rules, courtroom email.</span>
+        </li>
+        <li>
+          <strong>Courtroom technology.</strong>
+          <span>Available equipment, electronic-exhibit policy, hybrid-hearing posture.</span>
+        </li>
+      </ul>
       <p>
-        Start with the <a href="/j/">judge index</a>, or read about
-        <a href="/contribute/">contributing data</a>.
+        Every field on a judge page links back to its source — a court-website
+        URL, a standing-order PDF, a PACER-derived statistic, or an aggregated
+        observation from verified attorney contributors.
       </p>
+    </section>
+
+    <section>
+      <h2>Editorial principles</h2>
+      <ol class="judge-link-list" style="list-style: decimal">
+        <li>
+          <strong>Procedure, not personality.</strong>
+          <span>The Well does not publish subjective opinions about judges. Entries describe how the courtroom runs and cite where each fact came from.</span>
+        </li>
+        <li>
+          <strong>Every fact is sourced.</strong>
+          <span>Corrections without citations are indistinguishable from rumors. The schema requires a source entry for each procedural field.</span>
+        </li>
+        <li>
+          <strong>No AI in the data pipeline.</strong>
+          <span>Extractors are regex and structural HTML parsing. No language model writes judge data.</span>
+        </li>
+        <li>
+          <strong>Anonymity for contributors is architectural.</strong>
+          <span>The contribution path is designed so that no operator — including the maintainer — can link a specific observation to a specific contributor.</span>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Browse and learn more</h2>
+      <ul class="judge-link-list">
+        <li>
+          <a href="/j/">Judge index</a>
+          <span>Browse published judges by jurisdiction.</span>
+        </li>
+        <li>
+          <a href="/coverage/">Coverage and roadmap</a>
+          <span>Which courts are published, in progress, and planned.</span>
+        </li>
+        <li>
+          <a href="/methodology/">Methodology</a>
+          <span>How data enters the database and how it is reviewed.</span>
+        </li>
+        <li>
+          <a href="/glossary/">Glossary</a>
+          <span>Definitions of the procedural field values used on judge pages.</span>
+        </li>
+        <li>
+          <a href="/faq/">FAQ</a>
+          <span>Common questions about scope, sourcing, contribution, and use.</span>
+        </li>
+        <li>
+          <a href="/contribute/">Contribute</a>
+          <span>Add a jurisdiction, fix an extractor, correct a card, or apply as an attorney.</span>
+        </li>
+      </ul>
     </section>
   </article>
 </Base>
