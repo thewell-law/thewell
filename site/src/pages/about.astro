@@ -3,29 +3,154 @@ import Base from '../layouts/Base.astro';
 ---
 <Base
   title="About"
-  description="About The Well — mission, governance, and what is in the repository."
+  description="About The Well — mission, scope, principles, governance, and licensing."
 >
-  <h1 class="text-3xl mb-6">About</h1>
-  <p class="mb-4">
-    The Well is a free-to-read database of how federal and California state
-    judges run their courtrooms — standing orders, filing preferences, motion
-    practice cadence, and oral argument tendencies. The data is maintained by
-    verified California-barred attorneys who contribute observations
-    anonymously.
-  </p>
-  <p class="mb-4">
-    The information is already public. Standing orders are on court websites.
-    Local rules are free. But finding, reading, and cross-referencing those
-    documents for 150 judges takes a week of work nobody has time to do. The
-    Well changes that.
-  </p>
-  <h2 class="text-xl mt-8 mb-3">Licenses</h2>
-  <ul class="mb-4 list-disc pl-6">
-    <li><strong>Code:</strong> AGPL-3.0.</li>
-    <li><strong>Data &amp; schema:</strong> CC-BY-SA 4.0.</li>
-  </ul>
-  <h2 class="text-xl mt-8 mb-3">Maintainer</h2>
-  <p class="mb-4">
-    The Well is maintained by Zachary Brenner and the open-source community.
-  </p>
+  <article class="reference-page">
+    <header class="page-heading">
+      <h1>About</h1>
+      <p>
+        The Well is a free, open-source reference for how federal and
+        California state judges actually run their courtrooms. It is
+        maintained by Zachary Brenner and an open community of contributors.
+      </p>
+    </header>
+
+    <section>
+      <h2>Mission</h2>
+      <p>
+        Make the procedural knowledge that senior litigators carry in their
+        heads available to every attorney with a computer — without rumors,
+        without ratings, and without exposing the contributors who share what
+        they have seen.
+      </p>
+    </section>
+
+    <section>
+      <h2>Scope</h2>
+      <p>
+        The Well covers procedure: how a judge runs the courtroom and what
+        attorneys must do to comply. It does not publish subjective opinions,
+        ideological labels, reversal rates intended as quality signals, or
+        litigant-side commentary about case outcomes.
+      </p>
+      <p>
+        The initial scope is the U.S. District Court for the Southern District
+        of California (S.D. Cal.). Coverage will expand to additional federal
+        district courts in California, the Ninth Circuit, and the largest
+        California state superior courts. See the
+        <a href="/coverage/">coverage and roadmap</a> page for the current
+        plan.
+      </p>
+    </section>
+
+    <section>
+      <h2>What a judge page describes</h2>
+      <p>
+        Each judge page collects, in one place, every procedural fact a
+        practitioner needs before filing or appearing — page limits, courtesy
+        copies, motion-ruling cadence, oral-argument defaults, junior-attorney
+        encouragement, courtroom technology, telephonic-appearance policy, and
+        the standing orders themselves. Every field is sourced, and the source
+        is linked.
+      </p>
+      <p>
+        For definitions of the field values, see the
+        <a href="/glossary/">glossary</a>. For the underlying schema, see
+        <a
+          href="https://github.com/thewell/thewell/blob/main/docs/schema.md"
+          rel="noopener">docs/schema.md</a>.
+      </p>
+    </section>
+
+    <section>
+      <h2>Editorial principles</h2>
+      <ul class="judge-link-list">
+        <li>
+          <strong>Procedure, not personality.</strong>
+          <span>No subjective ratings, ideological labels, or commentary on outcomes.</span>
+        </li>
+        <li>
+          <strong>Every fact is sourced.</strong>
+          <span>Each procedural field carries a source entry. Corrections require a citation.</span>
+        </li>
+        <li>
+          <strong>No AI in the data pipeline.</strong>
+          <span>Extractors are deterministic — regex and structural parsing.</span>
+        </li>
+        <li>
+          <strong>Anonymity by architecture.</strong>
+          <span>Contributor identity cannot be linked to a specific observation, even by operators.</span>
+        </li>
+        <li>
+          <strong>Public review.</strong>
+          <span>The build is public. Scrapers commit changes as Git diffs that maintainers and the community can review.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Governance</h2>
+      <p>
+        The Well is operated solely by Zachary Brenner. Decisions about
+        scope, schema, and editorial policy are made publicly through pull
+        requests and issues against the source repository. The
+        <a href="/canary/">warrant canary</a> reflects the current status of
+        legal process directed at the operator.
+      </p>
+      <p>
+        See
+        <a
+          href="https://github.com/thewell/thewell/blob/main/docs/governance.md"
+          rel="noopener">docs/governance.md</a>
+        for the full governance document, including how disputes are resolved,
+        how contributors are vetted, and how scraper-driven commits are reviewed.
+      </p>
+    </section>
+
+    <section>
+      <h2>Funding</h2>
+      <p>
+        The Well operates without advertising, paid placements, or commercial
+        partnerships. Hosting is provided by Cloudflare Pages on a free tier.
+        Project costs are absorbed by the maintainer and supplemented by
+        voluntary
+        <a href="https://github.com/sponsors/zackpearson" rel="noopener">GitHub Sponsors</a>
+        contributions. No funder receives editorial influence.
+      </p>
+    </section>
+
+    <section>
+      <h2>Licenses</h2>
+      <ul class="judge-link-list">
+        <li>
+          <strong>Code: AGPL-3.0.</strong>
+          <span>If you operate a modified version as a network service, you must publish your modifications under the same license.</span>
+        </li>
+        <li>
+          <strong>Data and schema: CC-BY-SA 4.0.</strong>
+          <span>Attribute The Well, share derivatives under the same license.</span>
+        </li>
+      </ul>
+      <p>
+        See the
+        <a href="https://github.com/thewell/thewell/blob/main/LICENSE" rel="noopener">code license</a>
+        and
+        <a href="https://github.com/thewell/thewell/blob/main/LICENSE-DATA" rel="noopener">data license</a>
+        for the full terms.
+      </p>
+    </section>
+
+    <section>
+      <h2>Maintainer</h2>
+      <p>
+        The Well is maintained by Zachary Brenner. He retains sole control of
+        the source repository, the production deployment, the associated
+        domains, and the operational credentials. Security disclosures should
+        follow the process described in
+        <a
+          href="https://github.com/thewell/thewell/blob/main/SECURITY.md"
+          rel="noopener">SECURITY.md</a>.
+      </p>
+    </section>
+  </article>
 </Base>

@@ -1,0 +1,145 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Methodology"
+  description="How data enters The Well and how it is reviewed before publication."
+>
+  <article class="reference-page">
+    <header class="page-heading">
+      <h1>Methodology</h1>
+      <p>
+        How data enters The Well, how it is validated, and how it is reviewed
+        before publication. For the full technical document with code paths,
+        see
+        <a
+          href="https://github.com/thewell/thewell/blob/main/docs/methodology.md"
+          rel="noopener">docs/methodology.md</a>.
+      </p>
+    </header>
+
+    <section>
+      <h2>Data sources</h2>
+      <p>
+        Every procedural field on a judge page comes from one of four source
+        types. The source type appears next to the field on the page.
+      </p>
+      <ul class="judge-link-list">
+        <li>
+          <strong>Court website / standing order.</strong>
+          <span>The originating page on the court's site, or a linked PDF order. Extracted with deterministic rules and cited with a short excerpt.</span>
+        </li>
+        <li>
+          <strong>PACER-derived statistic.</strong>
+          <span>Computed from public docket data — for example, motion-ruling cadence (median days from full submission to order) or bench-ruling rate.</span>
+        </li>
+        <li>
+          <strong>Aggregated contributor observation.</strong>
+          <span>Verified-attorney observations, aggregated across many submissions before any field is published. No individual observation appears on the site.</span>
+        </li>
+        <li>
+          <strong>Verified court page.</strong>
+          <span>A field copied verbatim from a court-published procedure page, linked and dated. Used for stable facts like courtroom equipment lists.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Pipeline</h2>
+      <ol class="judge-link-list" style="list-style: decimal">
+        <li>
+          <strong>Scrape.</strong>
+          <span>One scraper per jurisdiction fetches the judge index, standing orders, and chambers-rules pages from the court's site. Scrapers live in <code>scrapers/</code> and run on a weekly schedule.</span>
+        </li>
+        <li>
+          <strong>Extract.</strong>
+          <span>Shared extractors at <code>scrapers/common/extractors.py</code> turn standing-order text into structured fields. Extraction is regex and structural HTML parsing — no language models.</span>
+        </li>
+        <li>
+          <strong>Persist.</strong>
+          <span>Output is written as YAML to <code>data/judges/{'{jurisdiction}'}/</code>. Every procedural field is paired with a <code>sources</code> entry containing the originating URL and a short excerpt.</span>
+        </li>
+        <li>
+          <strong>Validate.</strong>
+          <span><code>scripts/lint-judge-yaml.py</code> enforces the JSON Schema at <code>data/schema/judge.schema.json</code>. CI fails on any schema error.</span>
+        </li>
+        <li>
+          <strong>Review.</strong>
+          <span>The weekly scraper workflow commits directly to <code>main</code>. Maintainers review the resulting Git diff and roll back anomalies. Human-authored corrections go through the normal pull-request review.</span>
+        </li>
+        <li>
+          <strong>Render.</strong>
+          <span>Astro builds a fully static site from the validated YAML. Judge pages are pre-rendered HTML with no client-side JavaScript and no runtime database.</span>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>What the project does not do</h2>
+      <ul class="judge-link-list">
+        <li>
+          <strong>No AI in the data pipeline.</strong>
+          <span>Extraction is deterministic. The output of a scraper run is reproducible from its inputs. This is a hard constraint, not a temporary stance.</span>
+        </li>
+        <li>
+          <strong>No subjective ratings.</strong>
+          <span>The schema does not contain rating fields. Pages describe procedure and cite where each fact came from.</span>
+        </li>
+        <li>
+          <strong>No silent updates.</strong>
+          <span>Every change is a Git commit. Scraper-driven updates are visible in the public history and reviewable as diffs.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Confidence levels</h2>
+      <p>
+        Each <code>sources</code> entry on a judge page carries a confidence
+        label.
+      </p>
+      <ul class="judge-link-list">
+        <li>
+          <strong>Verified.</strong>
+          <span>A maintainer has confirmed the field against the cited source.</span>
+        </li>
+        <li>
+          <strong>Auto-extracted.</strong>
+          <span>The field came from a deterministic extractor with no human verification yet. The cited excerpt is the matched text.</span>
+        </li>
+        <li>
+          <strong>Aggregated.</strong>
+          <span>The field came from aggregated contributor observations. No individual observation appears.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Corrections and disputes</h2>
+      <p>
+        Corrections require a citation. Anyone may file an issue with the
+        <code>data:correction</code> label or open a pull request against the
+        YAML. If a correction is disputed by the cited source, the standing
+        order or court page is the controlling authority and the field is
+        updated to reflect it.
+      </p>
+      <p>
+        Where a court page and an aggregated observation conflict, the
+        court page wins, but both are visible — the field reflects the rule,
+        and the observation is preserved for context.
+      </p>
+    </section>
+
+    <section>
+      <h2>Update cadence</h2>
+      <p>
+        Scrapers run weekly. Standing orders and court pages are re-fetched
+        on that cadence; the <em>last fetched</em> timestamp on each entry
+        records when. Aggregated-observation fields are recomputed when new
+        contributions cross the aggregation threshold for that field. The
+        <em>last verified</em> timestamp on each <code>sources</code> entry
+        records the most recent confirmation.
+      </p>
+    </section>
+  </article>
+</Base>

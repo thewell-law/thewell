@@ -1,0 +1,144 @@
+---
+import Base from '../layouts/Base.astro';
+import { getAllJudges, getJurisdictions, jurisdictionName } from '../lib/judges';
+
+const judges = getAllJudges();
+const jurisdictions = getJurisdictions();
+
+interface RoadmapEntry {
+  slug: string;
+  name: string;
+  status: 'live' | 'in_progress' | 'planned';
+  notes: string;
+}
+
+const roadmap: RoadmapEntry[] = [
+  {
+    slug: 'casd',
+    name: 'U.S. District Court, Southern District of California',
+    status: 'in_progress',
+    notes: 'Reference scraper. Standing-order and chambers-rules extraction in active development.',
+  },
+  {
+    slug: 'cacd',
+    name: 'U.S. District Court, Central District of California',
+    status: 'planned',
+    notes: 'Largest federal district by case volume in California. Schema is compatible; scraper to follow CASD.',
+  },
+  {
+    slug: 'ca9',
+    name: 'U.S. Court of Appeals for the Ninth Circuit',
+    status: 'planned',
+    notes: 'Appellate procedure differs in shape; circuit-rule extraction will require extractor changes.',
+  },
+  {
+    slug: 'sdsc',
+    name: 'San Diego County Superior Court',
+    status: 'planned',
+    notes: 'First California state court. Local rules and judge-by-judge procedures published on the court site.',
+  },
+  {
+    slug: 'lasc',
+    name: 'Los Angeles County Superior Court',
+    status: 'planned',
+    notes: 'Largest state trial court in the United States. Coverage will follow San Diego County.',
+  },
+];
+
+function statusLabel(status: RoadmapEntry['status']): string {
+  if (status === 'live') return 'Published';
+  if (status === 'in_progress') return 'In progress';
+  return 'Planned';
+}
+
+const liveSlugs = new Set(jurisdictions.map((j) => j.slug));
+const enriched = roadmap.map((entry) => ({
+  ...entry,
+  status: liveSlugs.has(entry.slug) ? 'live' as const : entry.status,
+}));
+---
+<Base
+  title="Coverage and roadmap"
+  description="Which courts The Well covers today, which are in progress, and which are planned."
+>
+  <article class="reference-page">
+    <header class="page-heading">
+      <h1>Coverage and roadmap</h1>
+      <p>
+        The Well's scope is built jurisdiction by jurisdiction. Each new
+        court requires a scraper, an extractor configuration, and contributor
+        coverage. This page is the current state of that work.
+      </p>
+    </header>
+
+    <section class="summary-box" aria-label="Coverage summary">
+      <h2>At a glance</h2>
+      <dl>
+        <dt>Published judges</dt>
+        <dd>{judges.length}</dd>
+        <dt>Live jurisdictions</dt>
+        <dd>{jurisdictions.length}</dd>
+        <dt>Tracked jurisdictions</dt>
+        <dd>{enriched.length}</dd>
+      </dl>
+    </section>
+
+    <section>
+      <h2>Jurisdictions</h2>
+      <p>
+        The list below is ordered by current priority, not alphabetically.
+        Status reflects the publication state of judge pages, not the
+        completeness of every field on every page.
+      </p>
+      <div class="index-list">
+        {enriched.map((entry) => (
+          <section>
+            <h2>{entry.name}</h2>
+            <p>
+              <strong>Status:</strong> {statusLabel(entry.status)}
+              {entry.status === 'live' && ` - ${jurisdictions.find((j) => j.slug === entry.slug)?.count ?? 0} published judge${(jurisdictions.find((j) => j.slug === entry.slug)?.count ?? 0) === 1 ? '' : 's'}`}
+            </p>
+            <p>{entry.notes}</p>
+            {entry.status === 'live' && (
+              <p>
+                <a href={`/j/#${entry.slug}`}>Browse {jurisdictionName(entry.slug)}</a>
+              </p>
+            )}
+          </section>
+        ))}
+      </div>
+    </section>
+
+    <section>
+      <h2>What &ldquo;published&rdquo; means</h2>
+      <p>
+        A judge page is considered published when it contains, at minimum,
+        the judge's identifying information, every standing order linked from
+        the court's website for that judge, and the procedural fields the
+        extractors recover from those orders. Aggregated contributor fields
+        appear later, once the aggregation threshold is met for the
+        jurisdiction.
+      </p>
+      <p>
+        Pages are added in batches per jurisdiction rather than one at a
+        time. Adding a jurisdiction means writing the scraper, validating it
+        against the schema, and committing the resulting YAML in a single
+        reviewable change.
+      </p>
+    </section>
+
+    <section>
+      <h2>Help expand coverage</h2>
+      <p>
+        Adding a new court is the highest-leverage contribution. The schema
+        is jurisdiction-agnostic; the work is a scraper, extractor tuning,
+        and a small amount of jurisdiction-specific glue. See the
+        <a href="/contribute/">contribute</a> page and
+        <a
+          href="https://github.com/thewell/thewell/blob/main/CONTRIBUTING.md"
+          rel="noopener">CONTRIBUTING.md</a>
+        for the full path.
+      </p>
+    </section>
+  </article>
+</Base>
